@@ -1,0 +1,70 @@
+{"question_id":"F001","question_text":"I keep mixing up breadth-first search and depth-first search. Can you explain the difference?","intent":"concept_confusion"}
+{"question_id":"F002","question_text":"The role of a heuristic in A-star is confusing to me.","intent":"concept_confusion"}
+{"question_id":"F003","question_text":"I am struggling to understand why minimax backs up values from leaf nodes.","intent":"concept_confusion"}
+{"question_id":"F004","question_text":"I do not understand what makes a problem a constraint satisfaction problem.","intent":"concept_confusion"}
+{"question_id":"F005","question_text":"The relationship between a Q-value and a policy is unclear to me.","intent":"concept_confusion"}
+{"question_id":"F006","question_text":"I am having trouble understanding how alpha-beta pruning works.","intent":"concept_confusion"}
+{"question_id":"F007","question_text":"I cannot figure out how Bayesian reasoning changes a prior belief.","intent":"concept_confusion"}
+{"question_id":"F008","question_text":"What is the distinction between path cost and estimated remaining cost in A-star?","intent":"concept_confusion"}
+{"question_id":"F009","question_text":"I am confused about how a priority queue selects the next node.","intent":"concept_confusion"}
+{"question_id":"F010","question_text":"I don't see how a search tree differs from the original graph.","intent":"concept_confusion"}
+{"question_id":"F011","question_text":"When you say an admissible heuristic, what exactly does admissible mean?","intent":"clarification_request"}
+{"question_id":"F012","question_text":"Could you clarify what the frontier contains during graph search?","intent":"clarification_request"}
+{"question_id":"F013","question_text":"What does it mean for a policy to be optimal?","intent":"clarification_request"}
+{"question_id":"F014","question_text":"Can you explain what a terminal state refers to in minimax?","intent":"clarification_request"}
+{"question_id":"F015","question_text":"When we discuss a belief update, what is the evidence in that calculation?","intent":"clarification_request"}
+{"question_id":"F016","question_text":"Could you clarify the purpose of the visited set?","intent":"clarification_request"}
+{"question_id":"F017","question_text":"What is meant by a variable's domain in a CSP?","intent":"clarification_request"}
+{"question_id":"F018","question_text":"When you mention branching factor, how should I interpret that term?","intent":"clarification_request"}
+{"question_id":"F019","question_text":"Can you explain what the accumulated cost represents?","intent":"clarification_request"}
+{"question_id":"F020","question_text":"What exactly counts as a legal move in a game tree?","intent":"clarification_request"}
+{"question_id":"F021","question_text":"Could you work through a small example of alpha-beta pruning?","intent":"example_request"}
+{"question_id":"F022","question_text":"Show me a simple graph where BFS and DFS visit vertices differently.","intent":"example_request"}
+{"question_id":"F023","question_text":"Can we use numbers to see how A-star calculates its priority?","intent":"example_request"}
+{"question_id":"F024","question_text":"Give me a tiny game tree to demonstrate minimax.","intent":"example_request"}
+{"question_id":"F025","question_text":"Could you demonstrate Bayesian updating with a medical-test example?","intent":"example_request"}
+{"question_id":"F026","question_text":"I would like a worked example of backtracking in a CSP.","intent":"example_request"}
+{"question_id":"F027","question_text":"Can you illustrate how changing the reward affects an agent's behaviour?","intent":"example_request"}
+{"question_id":"F028","question_text":"Please walk me through a priority queue with three nodes.","intent":"example_request"}
+{"question_id":"F029","question_text":"Could you show a case where a heuristic overestimates the remaining distance?","intent":"example_request"}
+{"question_id":"F030","question_text":"Give me a concrete example of a graph with multiple shortest paths.","intent":"example_request"}
+{"question_id":"F031","question_text":"If BFS always expands the node with the smallest heuristic, right?","intent":"misconception_signal"}
+{"question_id":"F032","question_text":"A-star's h value records the cost accumulated from the start, doesn't it?","intent":"misconception_signal"}
+{"question_id":"F033","question_text":"DFS must return the shortest path whenever the graph has a solution, correct?","intent":"misconception_signal"}
+{"question_id":"F034","question_text":"Alpha-beta pruning can change the minimax value, can't it?","intent":"misconception_signal"}
+{"question_id":"F035","question_text":"The agent's reward directly specifies which policy it should execute, right?","intent":"misconception_signal"}
+{"question_id":"F036","question_text":"An admissible heuristic is allowed to overestimate the true remaining cost, correct?","intent":"misconception_signal"}
+{"question_id":"F037","question_text":"In a CSP, a constraint tells us the possible values of a variable, doesn't it?","intent":"misconception_signal"}
+{"question_id":"F038","question_text":"Bayes' rule ignores the prior belief once new evidence arrives, right?","intent":"misconception_signal"}
+{"question_id":"F039","question_text":"The priority queue in A-star orders nodes only by their depth, correct?","intent":"misconception_signal"}
+{"question_id":"F040","question_text":"A high immediate reward guarantees that a policy is optimal over the long term, doesn't it?","intent":"misconception_signal"}
+{"question_id":"F041","question_text":"I need to learn how graphs are represented before I can follow BFS properly.","intent":"prerequisite_confusion"}
+{"question_id":"F042","question_text":"A-star is difficult for me because I have not understood what a priority queue does.","intent":"prerequisite_confusion"}
+{"question_id":"F043","question_text":"I should probably understand game-tree levels before trying to work through minimax.","intent":"prerequisite_confusion"}
+{"question_id":"F044","question_text":"I cannot follow Bayesian updating until I understand conditional probability.","intent":"prerequisite_confusion"}
+{"question_id":"F045","question_text":"Before studying Q-learning, I need to understand what a state and an action are.","intent":"prerequisite_confusion"}
+{"question_id":"F046","question_text":"My difficulty with CSPs starts with not understanding variables and domains.","intent":"prerequisite_confusion"}
+{"question_id":"F047","question_text":"I get lost in DFS because recursion is still unfamiliar to me.","intent":"prerequisite_confusion"}
+{"question_id":"F048","question_text":"I need to grasp the difference between g and h before I can understand A-star.","intent":"prerequisite_confusion"}
+{"question_id":"F049","question_text":"Understanding Boolean logic first would help me learn CSP constraints.","intent":"prerequisite_confusion"}
+{"question_id":"F050","question_text":"I cannot make progress on minimax without first understanding what a game tree is.","intent":"prerequisite_confusion"}
+{"question_id":"F051","question_text":"What sequence of steps should I use to run BFS by hand?","intent":"procedure_question"}
+{"question_id":"F052","question_text":"How do I calculate the f-score of a node in A-star?","intent":"procedure_question"}
+{"question_id":"F053","question_text":"What is the process for updating a Q-value after an action?","intent":"procedure_question"}
+{"question_id":"F054","question_text":"How should I apply alpha-beta pruning to a game tree?","intent":"procedure_question"}
+{"question_id":"F055","question_text":"Can you tell me the steps for performing a Bayesian belief update?","intent":"procedure_question"}
+{"question_id":"F056","question_text":"How can I systematically solve a CSP using backtracking?","intent":"procedure_question"}
+{"question_id":"F057","question_text":"What steps should I follow to reconstruct a path after BFS finishes?","intent":"procedure_question"}
+{"question_id":"F058","question_text":"How do I determine which node the priority queue removes next?","intent":"procedure_question"}
+{"question_id":"F059","question_text":"Describe the procedure for evaluating a minimax tree from the leaves upward.","intent":"procedure_question"}
+{"question_id":"F060","question_text":"How can I check whether a heuristic is admissible?","intent":"procedure_question"}
+{"question_id":"F061","question_text":"Can you tell me a joke about computers?","intent":"other"}
+{"question_id":"F062","question_text":"What is the weather usually like in winter?","intent":"other"}
+{"question_id":"F063","question_text":"Who invented the first practical telephone?","intent":"other"}
+{"question_id":"F064","question_text":"Can you help me write a polite email asking for an assignment extension?","intent":"other"}
+{"question_id":"F065","question_text":"What are some healthy vegetarian lunch ideas?","intent":"other"}
+{"question_id":"F066","question_text":"Could you recommend a book about building better habits?","intent":"other"}
+{"question_id":"F067","question_text":"What is the difference between a laptop and a tablet?","intent":"other"}
+{"question_id":"F068","question_text":"Tell me a fun fact about the ocean.","intent":"other"}
+{"question_id":"F069","question_text":"Can you suggest a simple weekend activity with friends?","intent":"other"}
+{"question_id":"F070","question_text":"What are some tips for organizing my study desk?","intent":"other"}

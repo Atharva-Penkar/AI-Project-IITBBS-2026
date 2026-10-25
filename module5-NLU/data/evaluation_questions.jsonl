@@ -1,0 +1,70 @@
+{"question_id":"E001","question_text":"I am struggling to understand how depth-first search works.","intent":"concept_confusion"}
+{"question_id":"E002","question_text":"I get confused about the role of the heuristic in A-star.","intent":"concept_confusion"}
+{"question_id":"E003","question_text":"The difference between minimax and alpha-beta pruning is unclear to me.","intent":"concept_confusion"}
+{"question_id":"E004","question_text":"I am having trouble understanding constraint satisfaction problems.","intent":"concept_confusion"}
+{"question_id":"E005","question_text":"I cannot grasp how Bayesian reasoning updates beliefs.","intent":"concept_confusion"}
+{"question_id":"E006","question_text":"I am confused about how Q-learning chooses actions.","intent":"concept_confusion"}
+{"question_id":"E007","question_text":"The purpose of a priority queue in search is confusing.","intent":"concept_confusion"}
+{"question_id":"E008","question_text":"I find breadth-first search difficult to understand.","intent":"concept_confusion"}
+{"question_id":"E009","question_text":"I am not clear on what path cost represents in A-star.","intent":"concept_confusion"}
+{"question_id":"E010","question_text":"I am struggling to make sense of reinforcement learning.","intent":"concept_confusion"}
+{"question_id":"E011","question_text":"What is the purpose of a heuristic in informed search?","intent":"clarification_request"}
+{"question_id":"E012","question_text":"Why does breadth-first search use a FIFO queue?","intent":"clarification_request"}
+{"question_id":"E013","question_text":"Could you clarify the meaning of path cost?","intent":"clarification_request"}
+{"question_id":"E014","question_text":"What does the minimax algorithm calculate?","intent":"clarification_request"}
+{"question_id":"E015","question_text":"Why is pruning useful in alpha-beta search?","intent":"clarification_request"}
+{"question_id":"E016","question_text":"Can you explain what makes a problem a constraint satisfaction problem?","intent":"clarification_request"}
+{"question_id":"E017","question_text":"What is the role of a reward signal in reinforcement learning?","intent":"clarification_request"}
+{"question_id":"E018","question_text":"Could you explain how Bayesian reasoning changes a belief?","intent":"clarification_request"}
+{"question_id":"E019","question_text":"What information does a priority queue maintain?","intent":"clarification_request"}
+{"question_id":"E020","question_text":"Why is a search heuristic called an estimate?","intent":"clarification_request"}
+{"question_id":"E021","question_text":"Show me a small graph example of breadth-first search.","intent":"example_request"}
+{"question_id":"E022","question_text":"Can you walk through a simple depth-first search example?","intent":"example_request"}
+{"question_id":"E023","question_text":"Give me a numerical example of calculating an A-star score.","intent":"example_request"}
+{"question_id":"E024","question_text":"Could you demonstrate alpha-beta pruning on a game tree?","intent":"example_request"}
+{"question_id":"E025","question_text":"I would like a worked example of minimax.","intent":"example_request"}
+{"question_id":"E026","question_text":"Can you illustrate a constraint satisfaction problem with map colouring?","intent":"example_request"}
+{"question_id":"E027","question_text":"Show a simple example of Bayesian updating.","intent":"example_request"}
+{"question_id":"E028","question_text":"Can you demonstrate one Q-learning update with numbers?","intent":"example_request"}
+{"question_id":"E029","question_text":"Give me an example of a priority queue during search.","intent":"example_request"}
+{"question_id":"E030","question_text":"Walk me through a small reinforcement learning episode.","intent":"example_request"}
+{"question_id":"E031","question_text":"Is the heuristic value the exact cost already travelled?","intent":"misconception_signal"}
+{"question_id":"E032","question_text":"Does A-star use h(n) for the cost from the start node?","intent":"misconception_signal"}
+{"question_id":"E033","question_text":"Does breadth-first search always choose the deepest available node?","intent":"misconception_signal"}
+{"question_id":"E034","question_text":"Will depth-first search always return the shortest path?","intent":"misconception_signal"}
+{"question_id":"E035","question_text":"Does alpha-beta pruning change the minimax answer?","intent":"misconception_signal"}
+{"question_id":"E036","question_text":"Is the reward function itself the same thing as an RL policy?","intent":"misconception_signal"}
+{"question_id":"E037","question_text":"Does a heuristic always give the exact remaining distance to the goal?","intent":"misconception_signal"}
+{"question_id":"E038","question_text":"Does BFS explore an entire branch before visiting other branches?","intent":"misconception_signal"}
+{"question_id":"E039","question_text":"If a node has a low heuristic, does that mean its path cost must also be low?","intent":"misconception_signal"}
+{"question_id":"E040","question_text":"Does alpha-beta pruning produce a different optimal move from minimax?","intent":"misconception_signal"}
+{"question_id":"E041","question_text":"I cannot understand A-star because I do not yet understand heuristic estimates.","intent":"prerequisite_confusion"}
+{"question_id":"E042","question_text":"I cannot follow minimax because I do not understand game trees.","intent":"prerequisite_confusion"}
+{"question_id":"E043","question_text":"I am stuck on alpha-beta pruning because minimax is unclear to me.","intent":"prerequisite_confusion"}
+{"question_id":"E044","question_text":"I cannot understand Bayesian updating because probability basics are unfamiliar to me.","intent":"prerequisite_confusion"}
+{"question_id":"E045","question_text":"Q-learning makes little sense because I do not understand rewards and returns.","intent":"prerequisite_confusion"}
+{"question_id":"E046","question_text":"I cannot solve CSP examples because I do not understand domains and variables.","intent":"prerequisite_confusion"}
+{"question_id":"E047","question_text":"I cannot follow the search procedure because I do not know how a priority queue works.","intent":"prerequisite_confusion"}
+{"question_id":"E048","question_text":"A-star is difficult for me because path cost is still unclear.","intent":"prerequisite_confusion"}
+{"question_id":"E049","question_text":"I cannot understand DFS traversal because recursion is confusing to me.","intent":"prerequisite_confusion"}
+{"question_id":"E050","question_text":"I cannot learn Q-learning properly because state and action values are unfamiliar.","intent":"prerequisite_confusion"}
+{"question_id":"E051","question_text":"How do I implement depth-first search recursively?","intent":"procedure_question"}
+{"question_id":"E052","question_text":"What steps should I follow to calculate an A-star node score?","intent":"procedure_question"}
+{"question_id":"E053","question_text":"How can I construct a game tree for minimax?","intent":"procedure_question"}
+{"question_id":"E054","question_text":"How do I update alpha and beta while traversing a tree?","intent":"procedure_question"}
+{"question_id":"E055","question_text":"How can I formulate a map-colouring task as a CSP?","intent":"procedure_question"}
+{"question_id":"E056","question_text":"How do I compute the posterior probability using Bayes' rule?","intent":"procedure_question"}
+{"question_id":"E057","question_text":"What procedure is used to update Q-values in Q-learning?","intent":"procedure_question"}
+{"question_id":"E058","question_text":"How do I insert an item into a priority queue?","intent":"procedure_question"}
+{"question_id":"E059","question_text":"How can I trace BFS using a queue step by step?","intent":"procedure_question"}
+{"question_id":"E060","question_text":"How do I determine whether a heuristic is admissible?","intent":"procedure_question"}
+{"question_id":"E061","question_text":"What time is sunset today?","intent":"other"}
+{"question_id":"E062","question_text":"Tell me a joke about computers.","intent":"other"}
+{"question_id":"E063","question_text":"Who invented the first mechanical calculator?","intent":"other"}
+{"question_id":"E064","question_text":"Can you recommend a playlist for studying?","intent":"other"}
+{"question_id":"E065","question_text":"What is the weather forecast for tomorrow?","intent":"other"}
+{"question_id":"E066","question_text":"Write a short poem about a robot.","intent":"other"}
+{"question_id":"E067","question_text":"What should I do now?","intent":"other"}
+{"question_id":"E068","question_text":"Tell me something interesting.","intent":"other"}
+{"question_id":"E069","question_text":"Can you help me plan my weekend?","intent":"other"}
+{"question_id":"E070","question_text":"What is the capital of Japan?","intent":"other"}
