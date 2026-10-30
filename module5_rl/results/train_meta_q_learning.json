@@ -1,0 +1,10 @@
+{
+  "algo": "q_learning",
+  "episodes_done": 2500,
+  "seed": 0,
+  "n_students": 12,
+  "time_budget": 45.0,
+  "gamma": 0.95,
+  "eps_end": 0.05,
+  "decay_frac": 0.7
+}

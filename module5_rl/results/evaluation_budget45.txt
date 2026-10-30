@@ -1,0 +1,94 @@
+
+KNOWN  (mean over episodes)
+scenario                           Q-learning            SARSA        Heuristic        FixedPlan  ThresholdRepeat           Random
+mixed                                   0.663            0.625            0.499            0.535            0.509            0.585
+widespread_misconception                0.619            0.577            0.458            0.485            0.460            0.534
+small_group_behind                      0.659            0.644            0.486            0.537            0.498            0.554
+dominant_talkers                        0.746            0.709            0.581            0.624            0.576            0.653
+confident_wrong                         0.685            0.665            0.485            0.542            0.510            0.588
+quiet_knowers                           0.747            0.713            0.592            0.617            0.568            0.656
+ALL                                     0.687            0.656            0.517            0.557            0.520            0.595
+
+LEFT_BEHIND  (mean over episodes)
+scenario                           Q-learning            SARSA        Heuristic        FixedPlan  ThresholdRepeat           Random
+mixed                                   0.183            0.196            0.406            0.362            0.396            0.281
+widespread_misconception                0.206            0.219            0.438            0.412            0.448            0.344
+small_group_behind                      0.223            0.200            0.417            0.369            0.415            0.342
+dominant_talkers                        0.090            0.081            0.240            0.240            0.288            0.194
+confident_wrong                         0.173            0.167            0.417            0.352            0.408            0.288
+quiet_knowers                           0.094            0.079            0.240            0.256            0.344            0.192
+ALL                                     0.161            0.157            0.359            0.332            0.383            0.273
+
+COVERAGE  (mean over episodes)
+scenario                           Q-learning            SARSA        Heuristic        FixedPlan  ThresholdRepeat           Random
+mixed                                   0.817            0.608            0.325            1.000            1.000            0.783
+widespread_misconception                0.800            0.617            0.325            1.000            1.000            0.767
+small_group_behind                      0.850            0.683            0.342            1.000            1.000            0.808
+dominant_talkers                        0.792            0.675            0.425            1.000            1.000            0.833
+confident_wrong                         0.833            0.675            0.325            1.000            1.000            0.817
+quiet_knowers                           0.775            0.642            0.408            1.000            1.000            0.850
+ALL                                     0.811            0.650            0.358            1.000            1.000            0.810
+
+MISCONCEPTIONS_LEFT  (mean over episodes)
+scenario                           Q-learning            SARSA        Heuristic        FixedPlan  ThresholdRepeat           Random
+mixed                                   0.573            0.621            0.688            0.662            0.660            0.631
+widespread_misconception                1.090            1.200            1.300            1.173            1.179            1.148
+small_group_behind                      0.517            0.523            0.604            0.581            0.560            0.598
+dominant_talkers                        0.381            0.377            0.410            0.377            0.379            0.350
+confident_wrong                         0.579            0.619            0.758            0.660            0.640            0.658
+quiet_knowers                           0.352            0.396            0.435            0.394            0.385            0.390
+ALL                                     0.582            0.623            0.699            0.641            0.634            0.629
+
+ENGAGEMENT  (mean over episodes)
+scenario                           Q-learning            SARSA        Heuristic        FixedPlan  ThresholdRepeat           Random
+mixed                                   0.893            0.986            0.843            0.797            0.536            0.713
+widespread_misconception                0.897            0.987            0.843            0.800            0.536            0.711
+small_group_behind                      0.870            0.967            0.850            0.766            0.508            0.697
+dominant_talkers                        0.910            0.986            0.833            0.809            0.549            0.729
+confident_wrong                         0.902            0.982            0.841            0.799            0.534            0.721
+quiet_knowers                           0.906            0.984            0.845            0.801            0.542            0.723
+ALL                                     0.896            0.982            0.842            0.795            0.534            0.716
+
+PARTICIPATION_BALANCE  (mean over episodes)
+scenario                           Q-learning            SARSA        Heuristic        FixedPlan  ThresholdRepeat           Random
+mixed                                   0.670            0.686            0.725            0.666            0.660            0.667
+widespread_misconception                0.672            0.688            0.725            0.663            0.656            0.664
+small_group_behind                      0.768            0.763            0.747            0.729            0.714            0.730
+dominant_talkers                        0.640            0.632            0.735            0.642            0.635            0.627
+confident_wrong                         0.805            0.802            0.766            0.780            0.768            0.771
+quiet_knowers                           0.645            0.646            0.731            0.660            0.665            0.652
+ALL                                     0.700            0.703            0.738            0.690            0.683            0.685
+
+EQUITY_GAP  (mean over episodes)
+scenario                           Q-learning            SARSA        Heuristic        FixedPlan  ThresholdRepeat           Random
+mixed                                   0.141            0.168            0.091            0.055            0.044            0.102
+widespread_misconception                0.136            0.172            0.090            0.055            0.048            0.103
+small_group_behind                      0.128            0.174            0.049            0.016           -0.020            0.068
+dominant_talkers                        0.251            0.225            0.130            0.086            0.087            0.135
+confident_wrong                         0.149            0.160            0.092            0.050            0.020            0.104
+quiet_knowers                           0.244            0.240            0.122            0.067            0.037            0.125
+ALL                                     0.175            0.190            0.095            0.055            0.036            0.106
+
+TIME_USED  (mean over episodes)
+scenario                           Q-learning            SARSA        Heuristic        FixedPlan  ThresholdRepeat           Random
+mixed                                  43.100           44.775           45.000           33.000           31.575           44.575
+widespread_misconception               43.925           44.525           45.000           33.000           31.800           45.000
+small_group_behind                     43.650           43.550           45.000           33.000           32.175           44.625
+dominant_talkers                       44.425           44.100           45.000           33.000           28.950           44.675
+confident_wrong                        44.000           43.675           45.000           33.000           31.500           44.725
+quiet_knowers                          44.600           44.475           45.000           33.000           28.875           43.900
+ALL                                    43.950           44.183           45.000           33.000           30.812           44.583
+
+PAIRED DIFFERENCES (all scenarios pooled; mean +/- 95% CI)
+Q-learning - SARSA            known: +0.031 +/- 0.012 | left_behind: +0.005 +/- 0.016 | coverage: +0.161 +/- 0.046
+Q-learning - Heuristic        known: +0.170 +/- 0.009 | left_behind: -0.198 +/- 0.017 | coverage: +0.453 +/- 0.028
+Q-learning - FixedPlan        known: +0.130 +/- 0.010 | left_behind: -0.170 +/- 0.018 | coverage: -0.189 +/- 0.025
+Q-learning - ThresholdRepeat  known: +0.166 +/- 0.009 | left_behind: -0.222 +/- 0.017 | coverage: -0.189 +/- 0.025
+Q-learning - Random           known: +0.092 +/- 0.008 | left_behind: -0.112 +/- 0.014 | coverage: +0.001 +/- 0.029
+SARSA - Q-learning       known: -0.031 +/- 0.012 | left_behind: -0.005 +/- 0.016 | coverage: -0.161 +/- 0.046
+SARSA - Heuristic        known: +0.139 +/- 0.012 | left_behind: -0.202 +/- 0.020 | coverage: +0.292 +/- 0.045
+SARSA - FixedPlan        known: +0.099 +/- 0.010 | left_behind: -0.175 +/- 0.016 | coverage: -0.350 +/- 0.042
+SARSA - ThresholdRepeat  known: +0.135 +/- 0.011 | left_behind: -0.226 +/- 0.019 | coverage: -0.350 +/- 0.042
+SARSA - Random           known: +0.061 +/- 0.010 | left_behind: -0.116 +/- 0.014 | coverage: -0.160 +/- 0.043
+
+RL fallback rate to rule-based policy (unseen states): Q-learning=0.000, SARSA=0.000

@@ -1,0 +1,94 @@
+Decision trace: q_learning, scenario=small_group_behind, seed=5000000, budget=45.0
+
+ 1. [graph_search] next_concept -> whole class
+    Begin concept 'graph_search'; all declared prerequisites have been completed by the planner.
+ 2. [graph_search] example -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=medium, participation=balanced, left_behind=many, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=7.29) over REVISION (Q=7.10).
+ 3. [graph_search] example -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=7.06) over REVISION (Q=6.72).
+ 4. [graph_search] example -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=7.06) over REVISION (Q=6.72).
+ 5. [graph_search] exercise -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=few, uncertainty=high, time_pace=on track] chose EXERCISE (Q=6.51) over PEER_DISCUSSION (Q=6.41).
+ 6. [graph_search] example -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=low, time_pace=on track] chose EXAMPLE (Q=6.68) over REVISION (Q=6.67).
+ 7. [graph_search] example -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=low, time_pace=on track] chose EXAMPLE (Q=6.68) over REVISION (Q=6.67).
+ 8. [graph_search] peer_discussion -> whole class
+    RL policy (q_learning) in state [mastery=high, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=low, time_pace=on track] chose PEER_DISCUSSION (Q=7.21) over TA_SUPPORT (Q=7.13).
+ 9. [priority_queue] next_concept -> whole class
+    Begin concept 'priority_queue'; all declared prerequisites have been completed by the planner.
+10. [priority_queue] example -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=7.06) over REVISION (Q=6.72).
+11. [priority_queue] example -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=7.06) over REVISION (Q=6.72).
+12. [priority_queue] example -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=7.06) over REVISION (Q=6.72).
+13. [priority_queue] exercise -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=few, uncertainty=high, time_pace=on track] chose EXERCISE (Q=6.51) over PEER_DISCUSSION (Q=6.41).
+14. [priority_queue] example -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=low, time_pace=on track] chose EXAMPLE (Q=6.68) over REVISION (Q=6.67).
+15. [priority_queue] example -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=low, time_pace=on track] chose EXAMPLE (Q=6.68) over REVISION (Q=6.67).
+16. [priority_queue] peer_discussion -> whole class
+    RL policy (q_learning) in state [mastery=high, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=low, time_pace=on track] chose PEER_DISCUSSION (Q=7.21) over TA_SUPPORT (Q=7.13).
+17. [path_cost] next_concept -> whole class
+    Begin concept 'path_cost'; all declared prerequisites have been completed by the planner.
+18. [path_cost] example -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=7.06) over REVISION (Q=6.72).
+19. [path_cost] example -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=7.06) over REVISION (Q=6.72).
+20. [path_cost] exercise -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=on track] chose EXERCISE (Q=6.55) over EXAMPLE (Q=6.54).
+21. [path_cost] ta_intervention -> 8 students
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=low, time_pace=on track] chose TA_SUPPORT (Q=6.86) over ADVANCE (Q=6.43).
+22. [path_cost] example -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=6.80) over DIAGNOSTIC_QUIZ (Q=6.72).
+23. [path_cost] example -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=6.80) over DIAGNOSTIC_QUIZ (Q=6.72).
+24. [path_cost] lecture -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=uneven, left_behind=few, uncertainty=high, time_pace=on track] chose LECTURE (Q=6.49) over DIAGNOSTIC_QUIZ (Q=6.45).
+25. [path_cost] diagnostic_quiz -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=uneven, left_behind=few, uncertainty=low, time_pace=on track] chose DIAGNOSTIC_QUIZ (Q=6.53) over EXERCISE (Q=6.49).
+26. [heuristic] next_concept -> whole class
+    Begin concept 'heuristic'; all declared prerequisites have been completed by the planner.
+27. [heuristic] peer_discussion -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=uneven, left_behind=many, uncertainty=high, time_pace=on track] chose PEER_DISCUSSION (Q=7.23) over EXAMPLE (Q=6.75).
+28. [heuristic] peer_discussion -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=uneven, left_behind=many, uncertainty=high, time_pace=on track] chose PEER_DISCUSSION (Q=7.23) over EXAMPLE (Q=6.75).
+29. [heuristic] example -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=7.06) over REVISION (Q=6.72).
+30. [heuristic] example -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=high, time_pace=on track] chose EXAMPLE (Q=6.80) over DIAGNOSTIC_QUIZ (Q=6.72).
+31. [heuristic] exercise -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=few, uncertainty=high, time_pace=on track] chose EXERCISE (Q=6.51) over PEER_DISCUSSION (Q=6.41).
+32. [heuristic] revision -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=low, time_pace=behind schedule] chose REVISION (Q=6.13) over EXERCISE (Q=5.96).
+33. [heuristic] revision -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=low, time_pace=behind schedule] chose REVISION (Q=6.13) over EXERCISE (Q=5.96).
+34. [heuristic] revision -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=low, time_pace=behind schedule] chose REVISION (Q=6.13) over EXERCISE (Q=5.96).
+35. [heuristic] example -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=few, uncertainty=low, time_pace=behind schedule] chose EXAMPLE (Q=6.08) over PEER_GROUP (Q=5.79).
+36. [heuristic] example -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=few, uncertainty=low, time_pace=behind schedule] chose EXAMPLE (Q=6.08) over PEER_GROUP (Q=5.79).
+37. [heuristic] example -> whole class
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=few, uncertainty=low, time_pace=behind schedule] chose EXAMPLE (Q=6.08) over PEER_GROUP (Q=5.79).
+38. [heuristic] example -> whole class
+    RL policy (q_learning) in state [mastery=high, misconceptions=rare, engagement=high, participation=balanced, left_behind=few, uncertainty=low, time_pace=behind schedule] chose EXAMPLE (Q=6.67) over ADVANCE (Q=6.40).
+39. [admissibility] next_concept -> whole class
+    Begin concept 'admissibility'; all declared prerequisites have been completed by the planner.
+40. [admissibility] peer_discussion -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=behind schedule] chose PEER_DISCUSSION (Q=6.32) over EXAMPLE (Q=6.21).
+41. [admissibility] peer_discussion -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=behind schedule] chose PEER_DISCUSSION (Q=6.32) over EXAMPLE (Q=6.21).
+42. [admissibility] peer_discussion -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=behind schedule] chose PEER_DISCUSSION (Q=6.32) over EXAMPLE (Q=6.21).
+43. [admissibility] ta_intervention -> 1 students
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=high, time_pace=behind schedule] chose TA_SUPPORT (Q=5.96) over PEER_GROUP (Q=5.90).
+44. [admissibility] ta_intervention -> 18 students
+    RL policy (q_learning) in state [mastery=medium, misconceptions=rare, engagement=high, participation=balanced, left_behind=some, uncertainty=high, time_pace=behind schedule] chose TA_SUPPORT (Q=5.96) over PEER_GROUP (Q=5.90).
+45. [astar] next_concept -> whole class
+    Begin concept 'astar'; all declared prerequisites have been completed by the planner.
+46. [astar] peer_discussion -> whole class
+    RL policy (q_learning) in state [mastery=low, misconceptions=rare, engagement=high, participation=balanced, left_behind=many, uncertainty=high, time_pace=behind schedule] chose PEER_DISCUSSION (Q=6.32) over EXAMPLE (Q=6.21).

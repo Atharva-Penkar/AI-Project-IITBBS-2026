@@ -1,0 +1,16 @@
+policy                       known  left_behind  coverage  time_used
+Example x3                   0.551        0.326      1.00       18.0
+Example x4                   0.603        0.267      1.00       24.0
+Example x6                   0.682        0.184      1.00       36.0
+Example x7                   0.717        0.140      1.00       42.0
+E,E,E,X,E,E                  0.669        0.206      1.00       39.0
+E,E,P,E,E                    0.642        0.224      1.00       33.0
+Q-learning (reference)       0.688        0.161      0.78       44.1
+
+Paired difference in final mastery, Q-learning minus each fixed sequence (mean +/- 95% CI):
+  vs Example x3              +0.136 +/- 0.011
+  vs Example x4              +0.084 +/- 0.012
+  vs Example x6              +0.006 +/- 0.011
+  vs Example x7              -0.030 +/- 0.011
+  vs E,E,E,X,E,E             +0.019 +/- 0.013
+  vs E,E,P,E,E               +0.046 +/- 0.012
