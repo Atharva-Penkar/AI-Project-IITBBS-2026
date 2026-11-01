@@ -42,6 +42,10 @@ from shared.schema import ActionType, CourseCatalog, Event, EventType, Intent
 
 RL_DIR = Path(__file__).resolve().parent / "module5_rl" / "results"
 DIAGNOSE_ACTIONS = {ActionType.TA_INTERVENTION, ActionType.REVISION, ActionType.EXAMPLE}
+WIDESPREAD_MISCONCEPTION = "g_is_remaining_cost"
+"""Planted in most students in the widespread_misconception scenario: confusing
+path cost g(n) with the estimated remaining cost. Path_Cost is taught mid-course,
+so the scenario is reached within the default time budget."""
 
 
 def make_policy(name: str, catalog: CourseCatalog, time_budget: float):
@@ -96,7 +100,7 @@ def run_episode(
     verbose: bool = True,
 ) -> dict[str, float]:
     catalog = load_course_catalog()
-    profiles = make_classroom(catalog, scenario, n_students, seed=seed)
+    profiles = make_classroom(catalog, scenario, n_students, seed=seed, widespread_misconception=WIDESPREAD_MISCONCEPTION)
     sim = ClassroomSimulator(catalog, profiles, seed=seed)
     engine = StudentModelEngine(catalog, sim.student_ids(), dataclasses.replace(EngineConfig(), seed=seed))
     policy = make_policy(policy_name, catalog, time_budget)

@@ -33,6 +33,7 @@ python -m pip install -r requirements.txt
 Run every command from the repository root.
 
 ```bash
+python example.py
 python main.py --scenario widespread_misconception
 python main.py --policy rl --scenario small_group_behind
 python main.py --compare

@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 
-from module4_planner.action_model import ACTION_MODEL, FactThresholds, observe_facts, plan_concept
+from module4_planner.action_model import ACTION_MODEL, FactThresholds, observe_facts, plan_concept, suspected_share
 from module4_planner.models import ActionDecision, PlannerConfig
 from shared.schema import ActionType, CourseCatalog, GroupSummary, StudentEstimate
 
@@ -38,7 +38,7 @@ class PlanningTeachingPolicy:
         action_counts: Mapping[str, int] | None = None,
     ) -> ActionDecision:
         counts = dict(action_counts or {})
-        facts = observe_facts(summary, self.catalog, concept_id, counts, self.thresholds)
+        facts = observe_facts(summary, self.catalog, concept_id, counts, self.thresholds, students)
         plan = plan_concept(facts)
         previous = self._last.get(concept_id)
         self._last[concept_id] = (facts, tuple(plan or ()))
@@ -106,11 +106,11 @@ class PlanningTeachingPolicy:
             return weakest, compact(weak), None
 
         if action == ActionType.TA_INTERVENTION:
-            prevalence = summary.concepts[concept_id].misconception_prevalence
-            misconception = max(prevalence, key=prevalence.get)
+            cut = self.thresholds.suspected_misconception
+            share = suspected_share(students, concept_id, cut)
+            misconception = max(share, key=share.get)
             holders = [s.student_id for s in students
-                       if s.concepts[concept_id].misconceptions.get(misconception, 0.0)
-                       >= self.config.individual_misconception_threshold]
+                       if s.concepts[concept_id].misconceptions.get(misconception, 0.0) >= cut]
             return concept_id, compact(holders), misconception
 
         if action == ActionType.EXAMPLE:

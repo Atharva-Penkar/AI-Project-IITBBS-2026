@@ -11,10 +11,10 @@ from __future__ import annotations
 
 import heapq
 import itertools
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 
-from shared.schema import ActionType, CourseCatalog, GroupSummary
+from shared.schema import ActionType, CourseCatalog, GroupSummary, StudentEstimate
 
 
 @dataclass(frozen=True)
@@ -87,11 +87,23 @@ BLOCKERS = _f("prereq_gap", "misconception", "low_mastery", "low_engagement", "u
 class FactThresholds:
     uncertainty: float = 0.18
     misconception_prevalence: float = 0.15
+    suspected_misconception: float = 0.35
     low_mastery: float = 0.6
     low_engagement: float = 0.4
     uneven_participation_gini: float = 0.45
     prereq_mastery: float = 0.5
     prereq_gap_fraction: float = 0.25
+
+
+def suspected_share(students: Sequence[StudentEstimate], concept_id: str, cut: float) -> dict[str, float]:
+    """Share of students whose belief in each misconception is at least `cut`."""
+    if not students:
+        return {}
+    ids = sorted({m for s in students for m in s.concepts[concept_id].misconceptions})
+    return {
+        m: sum(s.concepts[concept_id].misconceptions.get(m, 0.0) >= cut for s in students) / len(students)
+        for m in ids
+    }
 
 
 def observe_facts(
@@ -100,8 +112,13 @@ def observe_facts(
     concept_id: str,
     counts: Mapping[str, int],
     t: FactThresholds = FactThresholds(),
+    students: Sequence[StudentEstimate] = (),
 ) -> frozenset[str]:
-    """Facts that hold now, from the class summary and this concept's action history."""
+    """Facts that hold now, from the class summary and this concept's action history.
+
+    A misconception counts as present when enough students are above the
+    `suspected_misconception` belief, so one quiz is enough to trigger support.
+    """
     cs = summary.concepts[concept_id]
     facts: set[str] = set()
     taught = sum(counts.get(a.value, 0) for a in (ActionType.LECTURE, ActionType.EXAMPLE, ActionType.REVISION))
@@ -111,7 +128,8 @@ def observe_facts(
         facts.add("evidence")
     elif counts.get(ActionType.DIAGNOSTIC_QUIZ.value, 0) >= 2:
         facts.add("evidence")
-    if max(cs.misconception_prevalence.values(), default=0.0) >= t.misconception_prevalence:
+    suspected = suspected_share(students, concept_id, t.suspected_misconception)
+    if max([*cs.misconception_prevalence.values(), *suspected.values()], default=0.0) >= t.misconception_prevalence:
         facts.add("misconception")
     if "evidence" in facts and cs.mean_mastery < t.low_mastery:
         facts.add("low_mastery")

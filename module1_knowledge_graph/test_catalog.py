@@ -33,3 +33,8 @@ def test_student_graph_uses_shared_student_model():
     assert "Path_Cost" in study_plan(student, "Astar")
     top = diagnose_student(student, "Astar")["ranked_causes"][0]
     assert top["concept_id"] != "Astar" or top["score"] > 0
+
+
+def test_concept_name_alone_is_not_a_misconception():
+    assert match_misconceptions("Can you show an example of Queues and Priority Queues?") == []
+    assert match_misconceptions("A priority queue works like a FIFO queue.")[0][0] == "pq_equals_fifo"

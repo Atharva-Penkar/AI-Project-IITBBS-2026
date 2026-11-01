@@ -39,11 +39,17 @@ def load_course_catalog() -> CourseCatalog:
 
 
 def match_misconceptions(text: str, concept_ids: list[str] | None = None) -> list[tuple[str, float]]:
-    """Misconception IDs whose wording (or a stored paraphrase) matches the text, best first."""
+    """Misconception IDs whose wording (or a stored paraphrase) matches the text, best first.
+
+    A match only counts if at least one shared word is not part of the concept's
+    own name, so "Can you explain priority queues?" does not match the
+    misconception "A priority queue and FIFO queue are interchangeable."
+    """
     text_tokens = tokens(text)
     out = []
     for cid in concept_ids or list(nodes):
-        score, stated, _ = best_misconception_detail(text_tokens, nodes[cid])
-        if stated is not None and score >= MATCH_THRESHOLD:
+        score, stated, words = best_misconception_detail(text_tokens, nodes[cid])
+        name_words = tokens(nodes[cid]["name"]) | tokens(cid.replace("_", " "))
+        if stated is not None and score >= MATCH_THRESHOLD and words - name_words:
             out.append((nodes[cid]["misconception_ids"][stated], score))
     return sorted(out, key=lambda pair: -pair[1])

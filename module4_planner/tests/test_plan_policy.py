@@ -46,3 +46,21 @@ def test_planning_policy_runs_a_course_and_explains_each_action():
         executor.execute(decision, sim, eng, planner)
     assert {ActionType.LECTURE, ActionType.DIAGNOSTIC_QUIZ}.issubset(seen)
     assert len(planner.completed_concepts) >= 2
+
+
+def test_quiz_revealing_a_widespread_misconception_leads_to_ta_support():
+    cat = astar_catalog()
+    profiles = make_classroom(cat, "widespread_misconception", 24, seed=0, widespread_misconception="g_is_edge_cost")
+    sim = ClassroomSimulator(cat, profiles, seed=0)
+    eng = StudentModelEngine(cat, sim.student_ids())
+    for cid in ("graph_search",):
+        for action in (ActionType.LECTURE, ActionType.EXAMPLE, ActionType.EXAMPLE, ActionType.EXAMPLE):
+            eng.update_many(sim.step(action, cid))
+    eng.update_many(sim.step(ActionType.LECTURE, "path_cost"))
+    eng.update_many(sim.step(ActionType.DIAGNOSTIC_QUIZ, "path_cost"))
+    policy = PlanningTeachingPolicy(cat)
+    students = [eng.get_student(s) for s in sim.student_ids()]
+    decision = policy.choose_action(eng.get_class_summary(), students, "path_cost",
+                                    {"lecture": 1, "diagnostic_quiz": 1})
+    assert decision.action == ActionType.TA_INTERVENTION
+    assert decision.target_misconception == "g_is_edge_cost"

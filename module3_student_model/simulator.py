@@ -133,7 +133,7 @@ class ClassroomSimulator:
     def _teach(self, sid: str, concept_id: str, action: ActionType, target_m: str | None) -> list[Event]:
         st, prof = self.state[sid], self.profiles[sid]
         self._learn(sid, concept_id, TEACHING_LEARN_RATE[action])
-        for m in list(st.misconceptions & set(self._concept_misconceptions(concept_id))):
+        for m in sorted(st.misconceptions & set(self._concept_misconceptions(concept_id))):
             rate = UNLEARN_TARGETED if m == target_m else UNLEARN_GENERAL
             if self.rng.random() < rate * (0.4 + 0.6 * st.engagement):
                 st.misconceptions.discard(m)
