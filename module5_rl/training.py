@@ -84,11 +84,12 @@ def train(
     log_every: int = 100,
     out_dir: str | None = None,
     checkpoint_every: int = 250,
+    catalog=None,
 ):
     if algo not in ("q_learning", "sarsa"):
         raise ValueError(algo)
     rng = np.random.default_rng(seed + 17)
-    env = TeachingEnv(n_students=n_students, time_budget=time_budget)
+    env = TeachingEnv(n_students=n_students, time_budget=time_budget, catalog=catalog)
     Q = np.zeros(STATE_SHAPE + (N_ACTIONS,))
     N = np.zeros(STATE_SHAPE + (N_ACTIONS,), dtype=np.int64)
     returns: list[float] = []
@@ -146,9 +147,15 @@ def main() -> None:
     ap.add_argument("--students", type=int, default=12)
     ap.add_argument("--time-budget", type=float, default=45.0)
     ap.add_argument("--out", default="module5_rl/results")
+    ap.add_argument("--catalog", choices=["sample", "kg"], default="kg",
+                    help="kg = the course in module1_knowledge_graph (used by main.py)")
     args = ap.parse_args()
+    catalog = None
+    if args.catalog == "kg":
+        from module1_knowledge_graph.catalog import load_course_catalog
+        catalog = load_course_catalog()
     for algo in (["q_learning", "sarsa"] if args.algo == "both" else [args.algo]):
-        train(algo, args.episodes, args.seed, args.students, args.time_budget, out_dir=args.out)
+        train(algo, args.episodes, args.seed, args.students, args.time_budget, out_dir=args.out, catalog=catalog)
 
 
 if __name__ == "__main__":

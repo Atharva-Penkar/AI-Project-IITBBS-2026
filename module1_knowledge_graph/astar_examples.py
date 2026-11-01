@@ -2,7 +2,7 @@
 A toy weighted graph where A* fails in the ways students confuse it.
 Start S, goal G. The optimal route S-B-G costs 4; the tempting route S-A-G costs 6.
 """
-from search import search, is_admissible
+from module1_knowledge_graph.search import search, is_admissible
 
 ADJ = {
     "S": [("A", 1), ("B", 2)],

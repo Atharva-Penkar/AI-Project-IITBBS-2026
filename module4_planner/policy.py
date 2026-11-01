@@ -98,6 +98,7 @@ class HeuristicTeachingPolicy:
             for s in students
             if s.confidently_wrong
             and s.confidence >= 0.65
+            and s.concepts[concept_id].n_observations > 0
             and s.concepts[concept_id].p_mastery < self.config.low_mastery_threshold
         ]
         if confidently_wrong:
@@ -174,8 +175,10 @@ class HeuristicTeachingPolicy:
             for s in students
             if s.participation < self.config.low_participation_threshold
         ]
-        if summary.participation_gini >= self.config.high_participation_gini or (
-            summary.mean_participation < self.config.low_participation_threshold
+        participation_actions = counts.get(ActionType.PEER_DISCUSSION.value, 0)
+        if participation_actions < self.config.max_participation_actions_per_concept and (
+            summary.participation_gini >= self.config.high_participation_gini
+            or summary.mean_participation < self.config.low_participation_threshold
         ):
             targets = self._compact_targets(quiet_students, all_ids)
             return ActionDecision(

@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from collections.abc import Callable
+from dataclasses import dataclass, field
 from typing import Any
 
 from shared.schema import ActionType, Event
@@ -18,18 +19,36 @@ class ExecutionResult:
     events: tuple[Event, ...]
     simulator_step: int
     targeted_student_count: int
+    group_plan: Any = None
+    notes: tuple[str, ...] = field(default_factory=tuple)
 
     @property
     def event_count(self) -> int:
         return len(self.events)
 
 
+GROUP_ACTIONS = {ActionType.PEER_DISCUSSION: "peer", ActionType.PEER_LEARNING: "peer", ActionType.TA_INTERVENTION: "ta"}
+
+
 class AdaptiveExecutor:
     """Bridge a decision to ``ClassroomSimulator.step`` and update the engine.
 
-    This layer is intentionally thin. It does not modify Team 3's simulator or
-    infer student state itself; it forwards events to ``engine.update_many``.
+    Optional hooks:
+    - ``group_scheduler``: an object with ``schedule(engine, concept_id, student_ids, kind)``
+      returning a plan with ``groups`` (each with ``student_ids``, ``concept_id``, ``kind``)
+      and ``unplaced``. Used for peer and TA actions, so groups, TAs and slots come
+      from the classroom CSP.
+    - ``event_hook``: called on each event before the engine sees it; returns the
+      event to use (for example, one re-labelled by the NLU pipeline).
     """
+
+    def __init__(
+        self,
+        group_scheduler: Any | None = None,
+        event_hook: Callable[[Event], Event] | None = None,
+    ) -> None:
+        self.group_scheduler = group_scheduler
+        self.event_hook = event_hook
 
     def execute(
         self,
@@ -59,12 +78,39 @@ class AdaptiveExecutor:
             target_ids = list(decision.target_student_ids)
             targeted_count = len(target_ids)
 
-        events = simulator.step(
-            action=decision.action,
-            concept_id=decision.concept_id,
-            target_ids=target_ids,
-            target_misconception=decision.target_misconception,
-        )
+        group_plan = None
+        notes: list[str] = []
+        kind = GROUP_ACTIONS.get(decision.action)
+        if self.group_scheduler is not None and kind is not None:
+            ids = target_ids or sorted(roster)
+            group_plan = self.group_scheduler.schedule(engine, decision.concept_id, ids, kind)
+            events = []
+            for group in group_plan.groups:
+                action = ActionType.REVISION if group.kind == "revision" else decision.action
+                events += simulator.step(
+                    action=action,
+                    concept_id=group.concept_id,
+                    target_ids=list(group.student_ids),
+                    target_misconception=decision.target_misconception,
+                )
+            if group_plan.unplaced:
+                notes.append(f"No valid group for {len(group_plan.unplaced)} student(s); taught them together instead.")
+                events += simulator.step(
+                    action=decision.action,
+                    concept_id=decision.concept_id,
+                    target_ids=list(group_plan.unplaced),
+                    target_misconception=decision.target_misconception,
+                )
+        else:
+            events = simulator.step(
+                action=decision.action,
+                concept_id=decision.concept_id,
+                target_ids=target_ids,
+                target_misconception=decision.target_misconception,
+            )
+
+        if self.event_hook is not None:
+            events = [self.event_hook(e) for e in events]
         engine.update_many(events)
 
         if planner is not None:
@@ -75,4 +121,6 @@ class AdaptiveExecutor:
             events=tuple(events),
             simulator_step=simulator.step_count,
             targeted_student_count=targeted_count,
+            group_plan=group_plan,
+            notes=tuple(notes),
         )

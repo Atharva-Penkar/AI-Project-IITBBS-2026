@@ -8,7 +8,7 @@ estimate mastery, or update probabilistic student models.
 
 import re
 
-from nlu.taxonomy import MISCONCEPTIONS
+from module5_nlu.nlu.taxonomy import MISCONCEPTIONS
 
 
 # Each rule maps to an existing canonical misconception ID.

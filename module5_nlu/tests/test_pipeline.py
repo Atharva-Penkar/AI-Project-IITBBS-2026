@@ -1,8 +1,8 @@
 
 import unittest
 
-from nlu.pipeline import analyse_question
-from nlu.taxonomy import INTENTS, CONCEPTS, MISCONCEPTIONS
+from module5_nlu.nlu.pipeline import analyse_question
+from module5_nlu.nlu.taxonomy import INTENTS, CONCEPTS, MISCONCEPTIONS
 
 
 class PipelineTests(unittest.TestCase):

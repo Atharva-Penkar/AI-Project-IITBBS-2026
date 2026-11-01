@@ -32,28 +32,13 @@ from shared.schema import ActionType, GroupSummary, StudentEstimate
 
 # Progression is controlled entirely by the policy: the planner's own completion
 # criterion (mean mastery >= 1.0) can never be met by a probabilistic estimate.
-MANUAL_PROGRESSION = PlannerConfig(mastery_target=1.0, max_fraction_below_threshold_for_completion=0.0)
+MANUAL_PROGRESSION = PlannerConfig(
+    mastery_target=1.0, max_fraction_below_threshold_for_completion=0.0, max_actions_per_concept=10_000
+)
 
 
 class AdvancingPlanner(AdaptivePlanner):
-    """``AdaptivePlanner`` + support for a policy that asks to move on early."""
-
-    def advance_active(self) -> None:
-        """Mark the active concept as finished (the policy decided to move on)."""
-        if self._active_concept_id is not None:
-            self._completed_concepts.add(self._active_concept_id)
-            self._active_concept_id = None
-
-    def plan_next(self, engine: object) -> ActionDecision | None:
-        decision = super().plan_next(engine)
-        if (
-            decision is not None
-            and decision.action == ActionType.NEXT_CONCEPT
-            and decision.metadata.get("rule") != "concept_transition"
-        ):
-            self.advance_active()
-            return super().plan_next(engine)  # transition into the next concept (or None)
-        return decision
+    """Kept for compatibility: AdaptivePlanner now lets a policy ask to move on."""
 
 
 def whole_class_decision(action: RLAction, concept_id: str, rationale: str, rule: str) -> ActionDecision:

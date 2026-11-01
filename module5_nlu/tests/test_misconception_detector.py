@@ -1,11 +1,11 @@
 
 import unittest
 
-from nlu.misconception_detector import (
+from module5_nlu.nlu.misconception_detector import (
     MISCONCEPTION_RULES,
     detect_misconceptions,
 )
-from nlu.taxonomy import MISCONCEPTIONS, CONCEPTS
+from module5_nlu.nlu.taxonomy import MISCONCEPTIONS, CONCEPTS
 
 
 class MisconceptionDetectorTests(unittest.TestCase):

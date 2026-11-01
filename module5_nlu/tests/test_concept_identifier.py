@@ -1,8 +1,8 @@
 
 import unittest
 
-from nlu.concept_identifier import identify_concepts
-from nlu.taxonomy import CONCEPTS
+from module5_nlu.nlu.concept_identifier import identify_concepts
+from module5_nlu.nlu.taxonomy import CONCEPTS
 
 
 class ConceptIdentifierTests(unittest.TestCase):

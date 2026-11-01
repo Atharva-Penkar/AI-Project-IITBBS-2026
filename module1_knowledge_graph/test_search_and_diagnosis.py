@@ -5,11 +5,11 @@ import csv
 import json
 from pathlib import Path
 
-from knowledge_graph import nodes, prereqs, prerequisite_chain, diagnose, explain, explained_away
-from export_csv import build_tables
-from search import (bfs_ancestors, dfs_ancestors, missing_prerequisites,
+from module1_knowledge_graph.knowledge_graph import nodes, prereqs, prerequisite_chain, diagnose, explain, explained_away
+from module1_knowledge_graph.export_csv import build_tables
+from module1_knowledge_graph.search import (bfs_ancestors, dfs_ancestors, missing_prerequisites,
                     search, is_admissible)
-from astar_examples import (ADJ, START, GOAL, H_ADMISSIBLE, H_OVERESTIMATE,
+from module1_knowledge_graph.astar_examples import (ADJ, START, GOAL, H_ADMISSIBLE, H_OVERESTIMATE,
                             run_variant, STUDENT_TEXT)
 
 

@@ -90,6 +90,19 @@ class AdaptivePlanner:
             self._completed_concepts.add(self._active_concept_id)
             self._active_concept_id = None
 
+        budget_note = ""
+        if self._active_concept_id is not None and (
+            sum(self._concept_action_counts[self._active_concept_id].values())
+            >= self.config.max_actions_per_concept
+        ):
+            behind = summary.concepts[self._active_concept_id].fraction_below_threshold
+            budget_note = (
+                f" Previous concept {self._active_concept_id!r} used its budget of "
+                f"{self.config.max_actions_per_concept} actions with {behind:.0%} of students still below threshold."
+            )
+            self._completed_concepts.add(self._active_concept_id)
+            self._active_concept_id = None
+
         if self._active_concept_id is None:
             next_concept = self._next_eligible_concept()
             if next_concept is None:
@@ -106,7 +119,7 @@ class AdaptivePlanner:
                 concept_id=next_concept,
                 rationale=(
                     f"Begin concept {next_concept!r}; all declared prerequisites "
-                    "have been completed by the planner."
+                    "have been completed by the planner." + budget_note
                 ),
                 priority=0.35,
                 metadata={
@@ -123,12 +136,23 @@ class AdaptivePlanner:
             action_counts=self._concept_action_counts[self._active_concept_id],
         )
         self._decisions_made += 1
+        if decision.action == ActionType.NEXT_CONCEPT and decision.metadata.get("rule") != "concept_transition":
+            # The policy asked to move on before the mastery criterion was met.
+            self.advance_active()
+            return self.plan_next(engine)
         return decision
+
+    def advance_active(self) -> None:
+        """Mark the active concept as finished because the policy decided to move on."""
+        if self._active_concept_id is not None:
+            self._completed_concepts.add(self._active_concept_id)
+            self._active_concept_id = None
 
     def record_execution(self, decision: ActionDecision) -> None:
         """Update decision-history counters after an action actually executes."""
         if decision.action != ActionType.NEXT_CONCEPT:
-            self._concept_action_counts[decision.concept_id][decision.action.value] += 1
+            concept = decision.metadata.get("active_concept", decision.concept_id)
+            self._concept_action_counts[concept][decision.action.value] += 1
 
     def reset(self) -> None:
         """Reset course progression while retaining the immutable catalog/policy."""

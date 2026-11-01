@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any, Callable, Deque, Dict, List, Optional, Tuple
 
 if TYPE_CHECKING:
-    from classroom_csp import CSP, Constraint
+    from module2_csp.classroom_csp import CSP, Constraint
 
 Assignment = Dict[str, Any]
 Domains = Dict[str, List[Any]]

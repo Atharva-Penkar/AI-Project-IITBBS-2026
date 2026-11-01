@@ -180,7 +180,23 @@ class ClassroomSimulator:
             intent=intent,
             nlu_confidence=conf,
             misconception_signals=signals,
+            text=self._question_text(concept_id, intent, signals),
         )
+
+    def _question_text(self, concept_id: str, intent: Intent, signals: list[str]) -> str:
+        """What the student says. NLU can re-derive intent and signals from this text."""
+        name = self.catalog.concept(concept_id).name
+        if signals:
+            statement = self.catalog.misconception(signals[0]).description.rstrip(".")
+            return f"Isn't it true that {statement[0].lower()}{statement[1:]}?"
+        templates = {
+            Intent.CONFUSION: [f"I don't understand {name}.", f"I am confused about {name}."],
+            Intent.CLARIFICATION: [f"Can you clarify what {name} means?", f"What exactly is {name}?"],
+            Intent.EXAMPLE_REQUEST: [f"Can you show an example of {name}?", f"Could you give an example of {name}?"],
+            Intent.UNCLEAR: ["I'm not sure about this part.", "What should I do here?"],
+        }
+        options = templates.get(intent, templates[Intent.UNCLEAR])
+        return options[self.step_count % len(options)]
 
     def _answer(self, sid: str, concept_id: str, action: ActionType) -> list[Event]:
         st, prof = self.state[sid], self.profiles[sid]

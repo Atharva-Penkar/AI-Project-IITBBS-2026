@@ -26,20 +26,27 @@ INTENT_MAP: dict[str, Intent] = {
 # Cross-module concept aliases. A concept is only emitted if it exists in the
 # actual catalog passed by the caller, so this adapter also works on smaller
 # course catalogs used by tests or later project modules.
-CONCEPT_MAP: dict[str, str] = {
-    "astar_search": "astar",
-    "a_star_search": "astar",
-    "a_star": "astar",
-    "bfs": "breadth_first_search",
-    "dfs": "depth_first_search",
+CONCEPT_MAP: dict[str, tuple[str, ...]] = {
+    "astar_search": ("Astar", "astar"),
+    "a_star_search": ("Astar", "astar"),
+    "a_star": ("Astar", "astar"),
+    "heuristic": ("Heuristic", "heuristic"),
+    "path_cost": ("Path_Cost", "path_cost"),
+    "priority_queue": ("Queue_PQ", "priority_queue"),
+    "breadth_first_search": ("BFS",),
+    "depth_first_search": ("DFS",),
+    "bfs": ("BFS",),
+    "dfs": ("DFS",),
 }
 
 # NLU taxonomy IDs -> nearest compatible Team 3 misconception IDs. The ASTAR
 # label is not the same identifier as Team 3's `confuses_g_and_h`, so explicit
 # mapping here avoids silently losing the signal.
-MISCONCEPTION_MAP: dict[str, str] = {
-    "ASTAR_G_VS_H": "confuses_g_and_h",
-    "ASTAR_HEURISTIC_VS_PATH_COST": "confuses_g_and_h",
+MISCONCEPTION_MAP: dict[str, tuple[str, ...]] = {
+    "ASTAR_G_VS_H": ("g_is_remaining_cost", "confuses_g_and_h"),
+    "ASTAR_HEURISTIC_VS_PATH_COST": ("h_is_cost_paid", "confuses_g_and_h"),
+    "DFS_GUARANTEES_SHORTEST_PATH": ("dfs_shortest_path",),
+    "BFS_USES_DEPTH_PRIORITY": ("bfs_uses_stack",),
 }
 
 
@@ -80,11 +87,10 @@ def nlu_result_to_event(
             raw_mid = detection.get("misconception_id", detection.get("id"))
             if not raw_mid:
                 continue
-            mapped_mid = MISCONCEPTION_MAP.get(str(raw_mid), str(raw_mid))
-            try:
-                owner = catalog.misconception(mapped_mid).concept_id
-            except KeyError:
+            mapped_mid = _supported_misconception(str(raw_mid), catalog)
+            if mapped_mid is None:
                 continue
+            owner = catalog.misconception(mapped_mid).concept_id
             # This sets a concept that actually contains the signal. The model
             # otherwise ignores misconception IDs not attached to the event's
             # concept, by design.
@@ -105,7 +111,7 @@ def nlu_result_to_event(
             raw_mid = detection.get("misconception_id", detection.get("id"))
             if not raw_mid:
                 continue
-            mapped_mid = MISCONCEPTION_MAP.get(str(raw_mid), str(raw_mid))
+            mapped_mid = _supported_misconception(str(raw_mid), catalog)
             if mapped_mid in valid_misconceptions and mapped_mid not in signals:
                 signals.append(mapped_mid)
 
@@ -136,9 +142,19 @@ def _supported_concept(raw_concept: str | None, available: set[str]) -> str | No
     """Resolve a raw NLU concept only if the shared catalog supports it."""
     if not raw_concept:
         return None
-    mapped = CONCEPT_MAP.get(raw_concept, raw_concept)
-    if mapped in available:
-        return mapped
-    # Accept a case-insensitive canonical ID without inventing a synonym.
     lower_lookup = {candidate.lower(): candidate for candidate in available}
-    return lower_lookup.get(mapped.lower())
+    for mapped in (*CONCEPT_MAP.get(raw_concept, ()), raw_concept):
+        if mapped in available:
+            return mapped
+        if mapped.lower() in lower_lookup:
+            return lower_lookup[mapped.lower()]
+    return None
+
+
+def _supported_misconception(raw_id: str, catalog: CourseCatalog) -> str | None:
+    """Resolve an NLU misconception label to a misconception ID in the catalog."""
+    known = {m.id for m in catalog.misconceptions}
+    for mapped in (*MISCONCEPTION_MAP.get(raw_id, ()), raw_id):
+        if mapped in known:
+            return mapped
+    return None

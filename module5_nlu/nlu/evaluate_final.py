@@ -2,11 +2,12 @@
 import json
 from collections import Counter
 
-from nlu.intent_classifier import classify_intent
+from module5_nlu.nlu.intent_classifier import classify_intent
+from pathlib import Path
 
 
-DATASET_PATH = "data/heldout_questions.jsonl"
 
+DATASET_PATH = str(Path(__file__).resolve().parent.parent / "data" / "final_evaluation_questions.jsonl")
 VALID_INTENTS = {
     "concept_confusion",
     "clarification_request",
@@ -91,7 +92,7 @@ def main():
     accuracy = correct / total if total else 0.0
 
     print("=" * 72)
-    print("HELD-OUT INTENT CLASSIFIER EVALUATION")
+    print("FINAL INTENT CLASSIFIER EVALUATION")
     print("=" * 72)
     print(f"Dataset: {DATASET_PATH}")
     print(f"Total questions: {total}")

@@ -3,7 +3,7 @@ import json
 import unittest
 from pathlib import Path
 
-from nlu.taxonomy import CONCEPTS, INTENTS, MISCONCEPTIONS
+from module5_nlu.nlu.taxonomy import CONCEPTS, INTENTS, MISCONCEPTIONS
 
 
 ROOT = Path(__file__).resolve().parents[1]

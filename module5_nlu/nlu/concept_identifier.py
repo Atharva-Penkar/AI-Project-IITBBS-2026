@@ -7,7 +7,7 @@ It does not classify intent, diagnose mastery, or infer misconceptions.
 
 import re
 
-from nlu.taxonomy import CONCEPTS
+from module5_nlu.nlu.taxonomy import CONCEPTS
 
 
 def _find_alias_matches(question: str) -> list[dict[str, object]]:

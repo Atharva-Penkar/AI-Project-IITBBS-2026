@@ -11,7 +11,7 @@ import json
 import re
 from pathlib import Path
 
-from search import bfs_ancestors
+from module1_knowledge_graph.search import bfs_ancestors
 
 DATA_PATH = Path(__file__).with_name("knowledge_graph.json")
 LINKS_PATH = Path(__file__).with_name("resource_links.json")
@@ -42,10 +42,18 @@ def load_graph(path=DATA_PATH):
             raise ValueError(f"Edge refers to an unknown concept: {edge}")
         prereqs[edge["target"]].append(edge["source"])
         dependents[edge["source"]].append(edge["target"])
+    seen_ids = set()
     for n in nodes.values():
         for stated in n.get("misconception_paraphrases", {}):
             if stated not in n.get("misconceptions", []):
                 raise ValueError(f"{n['id']}: paraphrases given for unknown misconception: {stated!r}")
+        ids = n.get("misconception_ids", {})
+        if set(ids) != set(n.get("misconceptions", [])):
+            raise ValueError(f"{n['id']}: every misconception needs exactly one entry in misconception_ids")
+        for mid in ids.values():
+            if mid in seen_ids:
+                raise ValueError(f"Duplicate misconception id: {mid}")
+            seen_ids.add(mid)
     _assert_acyclic(prereqs)
     return nodes, prereqs, dependents
 
@@ -211,6 +219,7 @@ def diagnose(concept_id, difficulty_text="", mastery=None, top_k=5):
     for concept, depth in depths.items():
         node = nodes[concept]
         score, reasons = 0.0, []
+        matched_misconception = None
 
         if concept in mastery:
             m = mastery[concept]
@@ -223,6 +232,7 @@ def diagnose(concept_id, difficulty_text="", mastery=None, top_k=5):
         elif concept in found:
             best, best_mis, _ = found[concept]
             score += W_MISCONCEPTION * best
+            matched_misconception = node.get("misconception_ids", {}).get(best_mis)
             reasons.append(f"difficulty text matches misconception ({best:.0%}): \"{best_mis}\"")
 
         if not reasons:
@@ -237,6 +247,7 @@ def diagnose(concept_id, difficulty_text="", mastery=None, top_k=5):
             "name": node["name"],
             "depth": depth,
             "score": round(score, 3),
+            "misconception_id": matched_misconception,
             "confidence": "evidence" if score > 0 else "unverified",
             "reasons": reasons,
             "examples": by_kind["examples"],

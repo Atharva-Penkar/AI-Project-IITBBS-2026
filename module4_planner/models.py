@@ -66,6 +66,11 @@ class PlannerConfig:
     max_diagnostic_actions_per_concept: int = 2
     diagnostic_observation_target: int = 1
     escalation_after_actions: int = 5
+    max_participation_actions_per_concept: int = 3
+
+    # Coverage guard: after this many actions on one concept the planner moves
+    # on and reports who is still below the mastery threshold.
+    max_actions_per_concept: int = 15
 
     # If a targeted subset is empty after filtering, fall back to the class.
     # This avoids accidental no-op teaching actions caused by stale estimates.
@@ -98,5 +103,7 @@ class PlannerConfig:
             raise ValueError("diagnostic_observation_target cannot be negative")
         if self.escalation_after_actions < 1:
             raise ValueError("escalation_after_actions must be at least 1")
+        if self.max_actions_per_concept < 1:
+            raise ValueError("max_actions_per_concept must be at least 1")
         if self.target_min_students < 1:
             raise ValueError("target_min_students must be at least 1")

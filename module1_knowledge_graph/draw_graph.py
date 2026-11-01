@@ -3,7 +3,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from knowledge_graph import nodes, prereqs
+from module1_knowledge_graph.knowledge_graph import nodes, prereqs
 
 layer = {}
 

@@ -9,7 +9,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
-from nlu.intent_classifier import classify_intent
+from module5_nlu.nlu.intent_classifier import classify_intent
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent

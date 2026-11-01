@@ -1,8 +1,8 @@
 
 import unittest
 
-from nlu.intent_classifier import classify_intent
-from nlu.taxonomy import INTENTS
+from module5_nlu.nlu.intent_classifier import classify_intent
+from module5_nlu.nlu.taxonomy import INTENTS
 
 
 class IntentClassifierTests(unittest.TestCase):

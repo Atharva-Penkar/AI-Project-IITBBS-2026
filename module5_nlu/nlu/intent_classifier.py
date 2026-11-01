@@ -7,7 +7,7 @@ estimate student mastery, or update student misconception beliefs.
 
 import re
 
-from nlu.taxonomy import INTENTS
+from module5_nlu.nlu.taxonomy import INTENTS
 
 
 # These patterns look for explicit evidence of a possible misconception.

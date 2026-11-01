@@ -20,7 +20,10 @@
       "resources": [
         "Course notes: problem formulation",
         "Worked example: route-finding problem"
-      ]
+      ],
+      "misconception_ids": {
+        "An AI problem is only a list of possible answers.": "ai_problem_is_answer_list"
+      }
     },
     {
       "id": "Graph_Basics",
@@ -47,7 +50,11 @@
       "resources": [
         "Graph representation notes",
         "Practice: draw a state-space graph"
-      ]
+      ],
+      "misconception_ids": {
+        "An edge always has the same cost.": "edges_same_cost",
+        "A node and an edge represent the same thing.": "node_equals_edge"
+      }
     },
     {
       "id": "BFS",
@@ -74,7 +81,11 @@
       "resources": [
         "BFS trace example",
         "Exercise: shortest path in an unweighted graph"
-      ]
+      ],
+      "misconception_ids": {
+        "BFS is always the lowest-cost algorithm.": "bfs_always_lowest_cost",
+        "BFS uses a stack.": "bfs_uses_stack"
+      }
     },
     {
       "id": "DFS",
@@ -101,7 +112,11 @@
       "resources": [
         "DFS traversal worksheet",
         "Exercise: trace DFS with a visited set"
-      ]
+      ],
+      "misconception_ids": {
+        "DFS always finds the shortest path.": "dfs_shortest_path",
+        "DFS cannot revisit or backtrack.": "dfs_cannot_backtrack"
+      }
     },
     {
       "id": "Path_Cost",
@@ -128,7 +143,11 @@
       "resources": [
         "Worked path-cost calculation",
         "Exercise: compare two routes with edge weights"
-      ]
+      ],
+      "misconception_ids": {
+        "Path cost is the estimated remaining cost to the goal.": "g_is_remaining_cost",
+        "Only the most recent edge contributes to g(n).": "g_is_last_edge"
+      }
     },
     {
       "id": "Queue_PQ",
@@ -155,7 +174,11 @@
       "resources": [
         "Queue vs priority queue comparison",
         "Exercise: update and pop frontier entries"
-      ]
+      ],
+      "misconception_ids": {
+        "A priority queue always removes the earliest inserted item.": "pq_is_fifo",
+        "A priority queue and FIFO queue are interchangeable.": "pq_equals_fifo"
+      }
     },
     {
       "id": "Heuristic",
@@ -183,7 +206,11 @@
       "resources": [
         "Heuristic estimation notes",
         "Exercise: calculate straight-line-distance heuristic"
-      ]
+      ],
+      "misconception_ids": {
+        "h(n) is the cost already paid.": "h_is_cost_paid",
+        "A heuristic must always equal the true remaining cost.": "h_must_be_exact"
+      }
     },
     {
       "id": "UCS",
@@ -211,7 +238,11 @@
       "resources": [
         "UCS frontier trace",
         "Exercise: weighted route-finding"
-      ]
+      ],
+      "misconception_ids": {
+        "UCS prioritizes the smallest heuristic value.": "ucs_uses_heuristic",
+        "UCS is equivalent to BFS even with unequal edge costs.": "ucs_equals_bfs"
+      }
     },
     {
       "id": "Greedy",
@@ -239,7 +270,11 @@
       "resources": [
         "Greedy vs A* comparison",
         "Exercise: compare heuristic-only choices"
-      ]
+      ],
+      "misconception_ids": {
+        "Greedy search always finds an optimal path.": "greedy_always_optimal",
+        "Greedy prioritizes g(n)+h(n).": "greedy_uses_g_plus_h"
+      }
     },
     {
       "id": "Astar",
@@ -276,7 +311,12 @@
         "A* worked trace",
         "Exercise: calculate g, h, and f for each frontier node",
         "Priority queue simulation"
-      ]
+      ],
+      "misconception_ids": {
+        "A* uses only h(n).": "astar_uses_only_h",
+        "A* uses only g(n).": "astar_uses_only_g",
+        "A* is guaranteed optimal for every heuristic and every implementation.": "astar_always_optimal"
+      }
     },
     {
       "id": "Admissibility",
@@ -303,7 +343,11 @@
       "resources": [
         "Worked example: an inadmissible heuristic makes A* return a suboptimal path",
         "Exercise: check whether a given heuristic is admissible"
-      ]
+      ],
+      "misconception_ids": {
+        "An overestimating heuristic still guarantees an optimal A* path.": "overestimate_still_optimal",
+        "Any heuristic that gives a plausible-looking estimate is admissible.": "plausible_means_admissible"
+      }
     }
   ],
   "edges": [
