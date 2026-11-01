@@ -1,0 +1,12 @@
+id,name,type,description
+AI_Foundations,AI Problem Solving Foundations,concept,"Representing problems using states, actions, initial state, goal test, and path cost."
+Graph_Basics,Graph Basics,concept,"Nodes, edges, directed graphs, paths, and graph traversal."
+BFS,Breadth-First Search (BFS),concept,"Explores the frontier level by level, typically using a FIFO queue."
+DFS,Depth-First Search (DFS),concept,"Explores a branch deeply before backtracking, using a stack or recursion."
+Path_Cost,Path Cost g(n),concept,Accumulated cost from the start node to the current node.
+Queue_PQ,Queues and Priority Queues,concept,Data structures for managing the frontier; priority queues remove the item with the best priority.
+Heuristic,Heuristic h(n),concept,An estimate of the remaining cost from a node to the goal.
+UCS,Uniform-Cost Search (UCS),concept,Expands the frontier node with the lowest accumulated path cost g(n).
+Greedy,Greedy Best-First Search,concept,Chooses the frontier node with the lowest heuristic h(n).
+Astar,A* Search,concept,"Prioritizes nodes using f(n)=g(n)+h(n), combining path cost so far and estimated remaining cost."
+Admissibility,Admissible and Consistent Heuristics,concept,A heuristic is admissible if it never overestimates the true remaining cost. A* with an admissible heuristic returns an optimal path.

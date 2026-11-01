@@ -1,0 +1,24 @@
+concept_id,concept,resource
+AI_Foundations,AI Problem Solving Foundations,Course notes: problem formulation
+AI_Foundations,AI Problem Solving Foundations,Worked example: route-finding problem
+Graph_Basics,Graph Basics,Graph representation notes
+Graph_Basics,Graph Basics,Practice: draw a state-space graph
+BFS,Breadth-First Search (BFS),BFS trace example
+BFS,Breadth-First Search (BFS),Exercise: shortest path in an unweighted graph
+DFS,Depth-First Search (DFS),DFS traversal worksheet
+DFS,Depth-First Search (DFS),Exercise: trace DFS with a visited set
+Path_Cost,Path Cost g(n),Worked path-cost calculation
+Path_Cost,Path Cost g(n),Exercise: compare two routes with edge weights
+Queue_PQ,Queues and Priority Queues,Queue vs priority queue comparison
+Queue_PQ,Queues and Priority Queues,Exercise: update and pop frontier entries
+Heuristic,Heuristic h(n),Heuristic estimation notes
+Heuristic,Heuristic h(n),Exercise: calculate straight-line-distance heuristic
+UCS,Uniform-Cost Search (UCS),UCS frontier trace
+UCS,Uniform-Cost Search (UCS),Exercise: weighted route-finding
+Greedy,Greedy Best-First Search,Greedy vs A* comparison
+Greedy,Greedy Best-First Search,Exercise: compare heuristic-only choices
+Astar,A* Search,A* worked trace
+Astar,A* Search,"Exercise: calculate g, h, and f for each frontier node"
+Astar,A* Search,Priority queue simulation
+Admissibility,Admissible and Consistent Heuristics,Worked example: an inadmissible heuristic makes A* return a suboptimal path
+Admissibility,Admissible and Consistent Heuristics,Exercise: check whether a given heuristic is admissible

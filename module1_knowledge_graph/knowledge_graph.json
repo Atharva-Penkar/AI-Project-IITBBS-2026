@@ -1,0 +1,397 @@
+{
+  "title": "AI Search Knowledge Graph",
+  "scope": "Module 1: Search (knowledge graph and diagnostic search)",
+  "nodes": [
+    {
+      "id": "AI_Foundations",
+      "name": "AI Problem Solving Foundations",
+      "type": "concept",
+      "description": "Representing problems using states, actions, initial state, goal test, and path cost.",
+      "prerequisites": [],
+      "misconceptions": [
+        "An AI problem is only a list of possible answers."
+      ],
+      "misconception_paraphrases": {
+        "An AI problem is only a list of possible answers.": [
+          "A search problem is just a list of all the possible answers.",
+          "AI problem solving only means listing answers, with no states or actions."
+        ]
+      },
+      "resources": [
+        "Course notes: problem formulation",
+        "Worked example: route-finding problem"
+      ]
+    },
+    {
+      "id": "Graph_Basics",
+      "name": "Graph Basics",
+      "type": "concept",
+      "description": "Nodes, edges, directed graphs, paths, and graph traversal.",
+      "prerequisites": [
+        "AI_Foundations"
+      ],
+      "misconceptions": [
+        "An edge always has the same cost.",
+        "A node and an edge represent the same thing."
+      ],
+      "misconception_paraphrases": {
+        "An edge always has the same cost.": [
+          "All edges in a graph have equal cost.",
+          "Every edge costs the same amount."
+        ],
+        "A node and an edge represent the same thing.": [
+          "Nodes and edges are the same thing.",
+          "A node is the same as an edge."
+        ]
+      },
+      "resources": [
+        "Graph representation notes",
+        "Practice: draw a state-space graph"
+      ]
+    },
+    {
+      "id": "BFS",
+      "name": "Breadth-First Search (BFS)",
+      "type": "concept",
+      "description": "Explores the frontier level by level, typically using a FIFO queue.",
+      "prerequisites": [
+        "Graph_Basics"
+      ],
+      "misconceptions": [
+        "BFS is always the lowest-cost algorithm.",
+        "BFS uses a stack."
+      ],
+      "misconception_paraphrases": {
+        "BFS is always the lowest-cost algorithm.": [
+          "BFS always finds the cheapest path in a weighted graph.",
+          "BFS gives the lowest cost path even when edge costs differ."
+        ],
+        "BFS uses a stack.": [
+          "BFS expands nodes in last in first out order.",
+          "BFS works with a stack like DFS."
+        ]
+      },
+      "resources": [
+        "BFS trace example",
+        "Exercise: shortest path in an unweighted graph"
+      ]
+    },
+    {
+      "id": "DFS",
+      "name": "Depth-First Search (DFS)",
+      "type": "concept",
+      "description": "Explores a branch deeply before backtracking, using a stack or recursion.",
+      "prerequisites": [
+        "Graph_Basics"
+      ],
+      "misconceptions": [
+        "DFS always finds the shortest path.",
+        "DFS cannot revisit or backtrack."
+      ],
+      "misconception_paraphrases": {
+        "DFS always finds the shortest path.": [
+          "DFS always gives the shortest path.",
+          "DFS is guaranteed to find the optimal path."
+        ],
+        "DFS cannot revisit or backtrack.": [
+          "DFS never goes back once it moves forward.",
+          "DFS has no backtracking."
+        ]
+      },
+      "resources": [
+        "DFS traversal worksheet",
+        "Exercise: trace DFS with a visited set"
+      ]
+    },
+    {
+      "id": "Path_Cost",
+      "name": "Path Cost g(n)",
+      "type": "concept",
+      "description": "Accumulated cost from the start node to the current node.",
+      "prerequisites": [
+        "Graph_Basics"
+      ],
+      "misconceptions": [
+        "Path cost is the estimated remaining cost to the goal.",
+        "Only the most recent edge contributes to g(n)."
+      ],
+      "misconception_paraphrases": {
+        "Path cost is the estimated remaining cost to the goal.": [
+          "g(n) is the estimated cost from the node to the goal.",
+          "Path cost means the distance still left to reach the goal."
+        ],
+        "Only the most recent edge contributes to g(n).": [
+          "g(n) is just the cost of the last edge.",
+          "Path cost only counts the final step, not the whole path."
+        ]
+      },
+      "resources": [
+        "Worked path-cost calculation",
+        "Exercise: compare two routes with edge weights"
+      ]
+    },
+    {
+      "id": "Queue_PQ",
+      "name": "Queues and Priority Queues",
+      "type": "concept",
+      "description": "Data structures for managing the frontier; priority queues remove the item with the best priority.",
+      "prerequisites": [
+        "Graph_Basics"
+      ],
+      "misconceptions": [
+        "A priority queue always removes the earliest inserted item.",
+        "A priority queue and FIFO queue are interchangeable."
+      ],
+      "misconception_paraphrases": {
+        "A priority queue always removes the earliest inserted item.": [
+          "A priority queue pops the first item that was added.",
+          "A priority queue works first in first out."
+        ],
+        "A priority queue and FIFO queue are interchangeable.": [
+          "A priority queue is the same as a normal FIFO queue.",
+          "You can use a regular queue instead of a priority queue."
+        ]
+      },
+      "resources": [
+        "Queue vs priority queue comparison",
+        "Exercise: update and pop frontier entries"
+      ]
+    },
+    {
+      "id": "Heuristic",
+      "name": "Heuristic h(n)",
+      "type": "concept",
+      "description": "An estimate of the remaining cost from a node to the goal.",
+      "prerequisites": [
+        "AI_Foundations",
+        "Graph_Basics"
+      ],
+      "misconceptions": [
+        "h(n) is the cost already paid.",
+        "A heuristic must always equal the true remaining cost."
+      ],
+      "misconception_paraphrases": {
+        "h(n) is the cost already paid.": [
+          "h(n) is the cost so far from the start.",
+          "The heuristic is the cost already spent to reach the node."
+        ],
+        "A heuristic must always equal the true remaining cost.": [
+          "The heuristic has to be the exact cost to the goal.",
+          "A heuristic is only valid if it equals the real remaining cost."
+        ]
+      },
+      "resources": [
+        "Heuristic estimation notes",
+        "Exercise: calculate straight-line-distance heuristic"
+      ]
+    },
+    {
+      "id": "UCS",
+      "name": "Uniform-Cost Search (UCS)",
+      "type": "concept",
+      "description": "Expands the frontier node with the lowest accumulated path cost g(n).",
+      "prerequisites": [
+        "Path_Cost",
+        "Queue_PQ"
+      ],
+      "misconceptions": [
+        "UCS prioritizes the smallest heuristic value.",
+        "UCS is equivalent to BFS even with unequal edge costs."
+      ],
+      "misconception_paraphrases": {
+        "UCS prioritizes the smallest heuristic value.": [
+          "Uniform cost search picks the node with the lowest h(n).",
+          "UCS uses the heuristic to choose which node to expand."
+        ],
+        "UCS is equivalent to BFS even with unequal edge costs.": [
+          "UCS and BFS behave the same with different edge costs.",
+          "Uniform cost search is just BFS."
+        ]
+      },
+      "resources": [
+        "UCS frontier trace",
+        "Exercise: weighted route-finding"
+      ]
+    },
+    {
+      "id": "Greedy",
+      "name": "Greedy Best-First Search",
+      "type": "concept",
+      "description": "Chooses the frontier node with the lowest heuristic h(n).",
+      "prerequisites": [
+        "Heuristic",
+        "Queue_PQ"
+      ],
+      "misconceptions": [
+        "Greedy search always finds an optimal path.",
+        "Greedy prioritizes g(n)+h(n)."
+      ],
+      "misconception_paraphrases": {
+        "Greedy search always finds an optimal path.": [
+          "Greedy best-first search is guaranteed to give the shortest path.",
+          "Greedy search is always optimal."
+        ],
+        "Greedy prioritizes g(n)+h(n).": [
+          "Greedy best-first search orders nodes by f(n) = g(n) + h(n).",
+          "Greedy search uses both path cost and the heuristic."
+        ]
+      },
+      "resources": [
+        "Greedy vs A* comparison",
+        "Exercise: compare heuristic-only choices"
+      ]
+    },
+    {
+      "id": "Astar",
+      "name": "A* Search",
+      "type": "concept",
+      "description": "Prioritizes nodes using f(n)=g(n)+h(n), combining path cost so far and estimated remaining cost.",
+      "prerequisites": [
+        "Path_Cost",
+        "Heuristic",
+        "Queue_PQ",
+        "UCS",
+        "Admissibility"
+      ],
+      "misconceptions": [
+        "A* uses only h(n).",
+        "A* uses only g(n).",
+        "A* is guaranteed optimal for every heuristic and every implementation."
+      ],
+      "misconception_paraphrases": {
+        "A* uses only h(n).": [
+          "A* only looks at the heuristic and ignores path cost.",
+          "A* picks the node with the smallest h(n) only."
+        ],
+        "A* uses only g(n).": [
+          "A* only uses path cost and ignores the heuristic.",
+          "A* orders the frontier by g(n) alone."
+        ],
+        "A* is guaranteed optimal for every heuristic and every implementation.": [
+          "A* is always optimal with any heuristic.",
+          "A* always returns the shortest path no matter what heuristic I use."
+        ]
+      },
+      "resources": [
+        "A* worked trace",
+        "Exercise: calculate g, h, and f for each frontier node",
+        "Priority queue simulation"
+      ]
+    },
+    {
+      "id": "Admissibility",
+      "name": "Admissible and Consistent Heuristics",
+      "type": "concept",
+      "description": "A heuristic is admissible if it never overestimates the true remaining cost. A* with an admissible heuristic returns an optimal path.",
+      "prerequisites": [
+        "Heuristic"
+      ],
+      "misconceptions": [
+        "An overestimating heuristic still guarantees an optimal A* path.",
+        "Any heuristic that gives a plausible-looking estimate is admissible."
+      ],
+      "misconception_paraphrases": {
+        "An overestimating heuristic still guarantees an optimal A* path.": [
+          "A heuristic that overestimates still gives an optimal A* path.",
+          "Overestimating is fine, A* will still find the best path."
+        ],
+        "Any heuristic that gives a plausible-looking estimate is admissible.": [
+          "Any reasonable looking estimate counts as an admissible heuristic.",
+          "A heuristic is admissible as long as it looks like a sensible guess."
+        ]
+      },
+      "resources": [
+        "Worked example: an inadmissible heuristic makes A* return a suboptimal path",
+        "Exercise: check whether a given heuristic is admissible"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "AI_Foundations",
+      "target": "Graph_Basics",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Graph_Basics",
+      "target": "BFS",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Graph_Basics",
+      "target": "DFS",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Graph_Basics",
+      "target": "Path_Cost",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Graph_Basics",
+      "target": "Queue_PQ",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "AI_Foundations",
+      "target": "Heuristic",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Graph_Basics",
+      "target": "Heuristic",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Path_Cost",
+      "target": "UCS",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Queue_PQ",
+      "target": "UCS",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Heuristic",
+      "target": "Greedy",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Queue_PQ",
+      "target": "Greedy",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Path_Cost",
+      "target": "Astar",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Heuristic",
+      "target": "Astar",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Queue_PQ",
+      "target": "Astar",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "UCS",
+      "target": "Astar",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Heuristic",
+      "target": "Admissibility",
+      "relation": "prerequisite_of"
+    },
+    {
+      "source": "Admissibility",
+      "target": "Astar",
+      "relation": "prerequisite_of"
+    }
+  ],
+  "review_status": "draft: misconceptions and resource choices need instructor review before use with students"
+}

@@ -1,0 +1,48 @@
+{
+  "note": "Links come from web search results. Check each one before using it with students; replace with your course's own materials where they exist.",
+  "links": {
+    "AI_Foundations": [
+      {"title": "UW CSE 473 Lecture: Search (state spaces, search strategies)", "url": "https://courses.cs.washington.edu/courses/cse473/13sp/slides/02-search.pdf", "kind": "lecture notes"}
+    ],
+    "Graph_Basics": [
+      {"title": "UW CSE 473 Lecture: Search (state space graphs)", "url": "https://courses.cs.washington.edu/courses/cse473/13sp/slides/02-search.pdf", "kind": "lecture notes"}
+    ],
+    "BFS": [
+      {"title": "Edinburgh INF2D Lecture 3: Search strategies", "url": "https://opencourse.inf.ed.ac.uk/sites/default/files/https/opencourse.inf.ed.ac.uk/inf2d/2023/inf2dlectureslides03searchstrategies.pdf", "kind": "lecture notes"},
+      {"title": "Pitt CS1571 Lecture: BFS properties", "url": "https://people.cs.pitt.edu/~milos/courses/cs1571-Fall2010/Lectures/Class4.pdf", "kind": "lecture notes"}
+    ],
+    "DFS": [
+      {"title": "Edinburgh INF2D Lecture 3: Search strategies", "url": "https://opencourse.inf.ed.ac.uk/sites/default/files/https/opencourse.inf.ed.ac.uk/inf2d/2023/inf2dlectureslides03searchstrategies.pdf", "kind": "lecture notes"},
+      {"title": "MIT 16.410 Lecture 3: DFS and BFS", "url": "https://ocw.mit.edu/courses/16-410-principles-of-autonomy-and-decision-making-fall-2010/ee43f99f8c4b82c4aab96e8d8d294f30_MIT16_410F10_lec03.pdf", "kind": "lecture notes"}
+    ],
+    "Path_Cost": [
+      {"title": "Pathfinding Demystified: Generic Search Algorithm (Gabriel Gambetta)", "url": "https://gabrielgambetta.com/generic-search.html", "kind": "tutorial"},
+      {"title": "DataCamp: A* algorithm tutorial (g(n), h(n), f(n))", "url": "https://www.datacamp.com/tutorial/a-star-algorithm", "kind": "tutorial"}
+    ],
+    "Heuristic": [
+      {"title": "ECE448 Lecture 15 (heuristics)", "url": "https://courses.grainger.illinois.edu/ECE448/sp2023/slides/lec15.pdf", "kind": "lecture notes"},
+      {"title": "McGill COMP-424 Lecture 3: Informed search", "url": "https://www.cs.mcgill.ca/~dprecup/courses/AI/Lectures/ai-lecture03.pdf", "kind": "lecture notes"}
+    ],
+    "Queue_PQ": [
+      {"title": "Pathfinding Demystified: Generic Search Algorithm", "url": "https://gabrielgambetta.com/generic-search.html", "kind": "tutorial"},
+      {"title": "Unity Learn: The A* Pathfinding Algorithm Part 1 (open list)", "url": "https://learn.unity.com/tutorial/the-a-pathfinding-algorithm-part-1", "kind": "tutorial"}
+    ],
+    "UCS": [
+      {"title": "ECE448 Lecture 4 (uniform-cost search as A* with h=0)", "url": "https://courses.grainger.illinois.edu/ECE448/sp2021/slides/lec04.pdf", "kind": "lecture notes"}
+    ],
+    "Greedy": [
+      {"title": "Princeton COS402 Lecture 3 (greedy best-first, f = h)", "url": "https://www.cs.princeton.edu/courses/archive/fall15/cos402/readings/COS402Fall2015_lecture3.pdf", "kind": "lecture notes"},
+      {"title": "McGill COMP-424 Lecture 3: Best-first search", "url": "https://www.cs.mcgill.ca/~dprecup/courses/AI/Lectures/ai-lecture03.pdf", "kind": "lecture notes"}
+    ],
+    "Astar": [
+      {"title": "V-Lab@ANDC: interactive A* lab", "url": "https://vlab.andcollege.du.ac.in/csSc/astar/index.html", "kind": "interactive"},
+      {"title": "Oakland University: step-by-step A* demo", "url": "https://www.secs.oakland.edu/~tianlema/ai/lectures/L11/astar_demo.html", "kind": "interactive"},
+      {"title": "DataCamp: A* algorithm with Python code", "url": "https://www.datacamp.com/tutorial/a-star-algorithm", "kind": "tutorial"}
+    ],
+    "Admissibility": [
+      {"title": "CTU Prague ZUI Lecture 3 (admissible and consistent heuristics, 2025)", "url": "https://cw.fel.cvut.cz/wiki/_media/courses/zui/zui_l3_2025.pdf", "kind": "lecture notes"},
+      {"title": "Princeton COS402 Lecture 3 (admissible vs consistent, review questions)", "url": "https://www.cs.princeton.edu/courses/archive/fall15/cos402/readings/COS402Fall2015_lecture3.pdf", "kind": "lecture notes"},
+      {"title": "ECE448 Lecture 4 (admissible and consistent heuristics)", "url": "https://courses.grainger.illinois.edu/ECE448/sp2021/slides/lec04.pdf", "kind": "lecture notes"}
+    ]
+  }
+}

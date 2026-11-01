@@ -1,0 +1,23 @@
+concept_id,concept,misconception
+AI_Foundations,AI Problem Solving Foundations,An AI problem is only a list of possible answers.
+Graph_Basics,Graph Basics,An edge always has the same cost.
+Graph_Basics,Graph Basics,A node and an edge represent the same thing.
+BFS,Breadth-First Search (BFS),BFS is always the lowest-cost algorithm.
+BFS,Breadth-First Search (BFS),BFS uses a stack.
+DFS,Depth-First Search (DFS),DFS always finds the shortest path.
+DFS,Depth-First Search (DFS),DFS cannot revisit or backtrack.
+Path_Cost,Path Cost g(n),Path cost is the estimated remaining cost to the goal.
+Path_Cost,Path Cost g(n),Only the most recent edge contributes to g(n).
+Queue_PQ,Queues and Priority Queues,A priority queue always removes the earliest inserted item.
+Queue_PQ,Queues and Priority Queues,A priority queue and FIFO queue are interchangeable.
+Heuristic,Heuristic h(n),h(n) is the cost already paid.
+Heuristic,Heuristic h(n),A heuristic must always equal the true remaining cost.
+UCS,Uniform-Cost Search (UCS),UCS prioritizes the smallest heuristic value.
+UCS,Uniform-Cost Search (UCS),UCS is equivalent to BFS even with unequal edge costs.
+Greedy,Greedy Best-First Search,Greedy search always finds an optimal path.
+Greedy,Greedy Best-First Search,Greedy prioritizes g(n)+h(n).
+Astar,A* Search,A* uses only h(n).
+Astar,A* Search,A* uses only g(n).
+Astar,A* Search,A* is guaranteed optimal for every heuristic and every implementation.
+Admissibility,Admissible and Consistent Heuristics,An overestimating heuristic still guarantees an optimal A* path.
+Admissibility,Admissible and Consistent Heuristics,Any heuristic that gives a plausible-looking estimate is admissible.

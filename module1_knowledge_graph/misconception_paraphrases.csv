@@ -1,0 +1,45 @@
+concept_id,misconception,paraphrase
+AI_Foundations,An AI problem is only a list of possible answers.,A search problem is just a list of all the possible answers.
+AI_Foundations,An AI problem is only a list of possible answers.,"AI problem solving only means listing answers, with no states or actions."
+Graph_Basics,An edge always has the same cost.,All edges in a graph have equal cost.
+Graph_Basics,An edge always has the same cost.,Every edge costs the same amount.
+Graph_Basics,A node and an edge represent the same thing.,Nodes and edges are the same thing.
+Graph_Basics,A node and an edge represent the same thing.,A node is the same as an edge.
+BFS,BFS is always the lowest-cost algorithm.,BFS always finds the cheapest path in a weighted graph.
+BFS,BFS is always the lowest-cost algorithm.,BFS gives the lowest cost path even when edge costs differ.
+BFS,BFS uses a stack.,BFS expands nodes in last in first out order.
+BFS,BFS uses a stack.,BFS works with a stack like DFS.
+DFS,DFS always finds the shortest path.,DFS always gives the shortest path.
+DFS,DFS always finds the shortest path.,DFS is guaranteed to find the optimal path.
+DFS,DFS cannot revisit or backtrack.,DFS never goes back once it moves forward.
+DFS,DFS cannot revisit or backtrack.,DFS has no backtracking.
+Path_Cost,Path cost is the estimated remaining cost to the goal.,g(n) is the estimated cost from the node to the goal.
+Path_Cost,Path cost is the estimated remaining cost to the goal.,Path cost means the distance still left to reach the goal.
+Path_Cost,Only the most recent edge contributes to g(n).,g(n) is just the cost of the last edge.
+Path_Cost,Only the most recent edge contributes to g(n).,"Path cost only counts the final step, not the whole path."
+Queue_PQ,A priority queue always removes the earliest inserted item.,A priority queue pops the first item that was added.
+Queue_PQ,A priority queue always removes the earliest inserted item.,A priority queue works first in first out.
+Queue_PQ,A priority queue and FIFO queue are interchangeable.,A priority queue is the same as a normal FIFO queue.
+Queue_PQ,A priority queue and FIFO queue are interchangeable.,You can use a regular queue instead of a priority queue.
+Heuristic,h(n) is the cost already paid.,h(n) is the cost so far from the start.
+Heuristic,h(n) is the cost already paid.,The heuristic is the cost already spent to reach the node.
+Heuristic,A heuristic must always equal the true remaining cost.,The heuristic has to be the exact cost to the goal.
+Heuristic,A heuristic must always equal the true remaining cost.,A heuristic is only valid if it equals the real remaining cost.
+UCS,UCS prioritizes the smallest heuristic value.,Uniform cost search picks the node with the lowest h(n).
+UCS,UCS prioritizes the smallest heuristic value.,UCS uses the heuristic to choose which node to expand.
+UCS,UCS is equivalent to BFS even with unequal edge costs.,UCS and BFS behave the same with different edge costs.
+UCS,UCS is equivalent to BFS even with unequal edge costs.,Uniform cost search is just BFS.
+Greedy,Greedy search always finds an optimal path.,Greedy best-first search is guaranteed to give the shortest path.
+Greedy,Greedy search always finds an optimal path.,Greedy search is always optimal.
+Greedy,Greedy prioritizes g(n)+h(n).,Greedy best-first search orders nodes by f(n) = g(n) + h(n).
+Greedy,Greedy prioritizes g(n)+h(n).,Greedy search uses both path cost and the heuristic.
+Astar,A* uses only h(n).,A* only looks at the heuristic and ignores path cost.
+Astar,A* uses only h(n).,A* picks the node with the smallest h(n) only.
+Astar,A* uses only g(n).,A* only uses path cost and ignores the heuristic.
+Astar,A* uses only g(n).,A* orders the frontier by g(n) alone.
+Astar,A* is guaranteed optimal for every heuristic and every implementation.,A* is always optimal with any heuristic.
+Astar,A* is guaranteed optimal for every heuristic and every implementation.,A* always returns the shortest path no matter what heuristic I use.
+Admissibility,An overestimating heuristic still guarantees an optimal A* path.,A heuristic that overestimates still gives an optimal A* path.
+Admissibility,An overestimating heuristic still guarantees an optimal A* path.,"Overestimating is fine, A* will still find the best path."
+Admissibility,Any heuristic that gives a plausible-looking estimate is admissible.,Any reasonable looking estimate counts as an admissible heuristic.
+Admissibility,Any heuristic that gives a plausible-looking estimate is admissible.,A heuristic is admissible as long as it looks like a sensible guess.
