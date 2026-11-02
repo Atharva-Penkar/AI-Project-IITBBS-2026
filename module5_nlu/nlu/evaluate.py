@@ -2,7 +2,7 @@
 """Evaluate the rule-based intent classifier on labelled JSONL data.
 
 Run from the project root:
-    python -m nlu.evaluate
+    python -m module5_nlu.nlu.evaluate
 """
 
 import json

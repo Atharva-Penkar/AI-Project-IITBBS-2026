@@ -1,4 +1,9 @@
-"""Regenerate knowledge_graph.png from knowledge_graph.json (needs matplotlib)."""
+"""Regenerate knowledge_graph.png from knowledge_graph.json (needs matplotlib).
+
+    python -m module1_knowledge_graph.draw_graph
+"""
+from pathlib import Path
+
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -52,5 +57,6 @@ ax.set_xlim(min(xs) - 2, max(xs) + 2)
 ax.set_ylim(min(ys) - 1.5, max(ys) + 1.5)
 ax.axis("off")
 ax.set_title("AI Search Knowledge Graph (arrow = prerequisite of)")
-fig.savefig("knowledge_graph.png", dpi=150, bbox_inches="tight")
-print("wrote knowledge_graph.png")
+out_path = Path(__file__).resolve().parent / "knowledge_graph.png"
+fig.savefig(out_path, dpi=150, bbox_inches="tight")
+print(f"wrote {out_path}")

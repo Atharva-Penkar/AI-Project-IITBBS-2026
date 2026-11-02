@@ -1,102 +1,97 @@
-# module5_rl: Reinforcement-learning teaching policy (Team 5, Person A)
+# Reinforcement-learning teaching policy
 
-A tabular **Q-learning** and **SARSA** teaching policy that plugs into Team 4's `AdaptivePlanner`
-through the existing `TeachingPolicy` interface, trained and evaluated on Team 3's classroom
-simulator and student-model engine. No existing file is modified; the module only adds a new folder.
+Tabular Q-learning and SARSA policies that choose the next teaching action. They plug into the planner through the same `TeachingPolicy` interface as the rule-based policies, and are trained and evaluated on the classroom simulator and student-model engine.
 
 ## Formulation
 
-**Finite-horizon MDP** (not a bandit): actions change the future state (prerequisite repair, engagement,
-time budget, progress through the syllabus), so rewards are delayed and an action's value depends on what follows.
+We treat this as a finite-horizon MDP rather than a bandit, because actions change what happens later: fixing a prerequisite, keeping engagement up, and using up class time all matter, so rewards are delayed.
 
 | Item | Definition |
 |---|---|
-| State (7 features, 1,458 states) | Team 3's `discretise` (mastery, misconception prevalence, engagement, participation balance, share left behind; each 0-2) + `uncertainty` (0/1) + `time_pace` (behind / on track / ahead of schedule). Built only from the engine's *estimates*. |
-| Actions (9) | lecture, example, diagnostic quiz, peer discussion, exercise, revision, **TA support** (targeted at misconception holders / weakest), **peer group** (targeted at students below mastery threshold), **advance** (ask the planner to move on). `select_targets` chooses *who* an action is aimed at. |
-| Reward (uses the simulator's TRUE state) | 10 x learning gain + 2 x misconceptions removed + 4 x engagement change + 2 x participation-balance change - 0.1 x class time; +1 per concept completed, - 3 x share of students not yet mastering a concept being left; terminal: + 10 x final mean mastery - 5 x share left behind. Weights are in `env.RewardWeights`. |
-| Episode | One simulated course (6 A* concepts) with a class-time budget (45 units by default; actions cost 0-1.5 units). |
-| Algorithms | epsilon-greedy Q-learning and SARSA, linearly decaying epsilon, visit-count learning rate, invalid actions masked (`ADVANCE` is illegal before anything is taught). |
-| Safety | A state never seen in training falls back to Team 4's rule-based policy (fallback rate in evaluation: 0.2% / 0%). |
-| Explainability | Every decision's `rationale` states the class state, the chosen action's Q-value and the runner-up's. |
+| State (1,458 states) | Five 3-level features from the student model's class summary (mastery, misconception prevalence, engagement, participation balance, share of students left behind), plus whether mastery is still uncertain (2 levels) and whether the class is behind, on track or ahead of schedule (3 levels). Built only from the model's estimates, never from the simulator's truth |
+| Actions (9) | lecture, example, diagnostic quiz, peer discussion, exercise, revision, TA support (aimed at students holding a misconception, or the weakest), peer group (aimed at students below the mastery threshold), advance (move to the next concept) |
+| Reward | Uses the simulator's true state. 10 x learning gain, 2 x misconceptions removed, 4 x engagement change, 2 x participation-balance change, minus 0.1 x class time; plus 1 per concept completed and minus 3 x the share of students who haven't mastered a concept being left behind; at the end, plus 10 x final mean mastery and minus 5 x the share left behind. Weights are in `env.RewardWeights` |
+| Episode | One simulated course with a class-time budget (45 units by default; actions cost 0 to 1.5) |
+| Learning | Epsilon-greedy with linearly decaying epsilon and a visit-count learning rate. Actions that make no sense (advancing before anything is taught) are masked |
+| Safety | A state never seen in training falls back to the rule-based policy. This happened 0% of the time at budget 45 and 0.2% at budget 90 |
+| Explanations | Each decision's rationale states the class state, the chosen action's Q-value and the runner-up's |
 
 ## Files
 
 | File | Purpose |
 |---|---|
-| `actions.py`, `state.py` | action space, targeting, time costs; state encoding |
-| `env.py` | training environment (simulator + engine + planner), reward |
-| `policies.py` | `RLTeachingPolicy`, `AdvancingPlanner`, baselines (`FixedLecturePlanPolicy`, `ThresholdRepeatPolicy`, `RandomPolicy`) |
-| `runner.py` | runs *any* `TeachingPolicy` through the real planner path (used for all evaluation) |
-| `training.py`, `evaluate.py`, `action_profile.py`, `ablation.py` | train, compare, inspect behaviour, sanity-check |
+| `actions.py`, `state.py` | Action space, who an action targets, time costs; state encoding |
+| `env.py` | Training environment (simulator, engine and planner) and the reward |
+| `policies.py` | `RLTeachingPolicy`, `AdvancingPlanner`, and the baselines `FixedLecturePlanPolicy`, `ThresholdRepeatPolicy` and `RandomPolicy` |
+| `runner.py` | Runs any policy through the real planner path; all evaluation uses this |
+| `training.py`, `evaluate.py`, `action_profile.py`, `ablation.py` | Train, compare, inspect behaviour, and test against simple fixed sequences |
 | `tests/test_rl.py` | 22 tests |
-| `results/` | trained Q-tables, tables (`evaluation_budget45/90.txt|csv|json`), plots, decision traces, `ablation.txt`, `action_profile.csv` |
+| `results/` | The trained Q-tables, evaluation tables, plots, decision traces, ablation and action profile that the numbers below come from |
 
-## Run (from the repository root)
+## Running it
+
+From the project folder:
 
 ```bash
-pytest module5_rl
-python -m module5_rl.training --algo both --episodes 2500 --out module5_rl/results   # ~25 min on one core
-python -m module5_rl.evaluate --episodes 20 --budgets 45 90 --out module5_rl/results
-python -m module5_rl.action_profile --out module5_rl/results
-python -m module5_rl.ablation --out module5_rl/results
+python -m pytest module5_rl
 ```
 
-Use it in the planner:
+The trained Q-tables are already in `results/`, and `main.py --policy rl` uses them. You only need to train again if you change the environment or reward.
+
+The commands below write to a separate folder, `module5_rl/my_run`, so they don't overwrite the committed results. To reproduce the tables, train on the six-concept A* catalog, which is what the evaluation uses:
+
+```bash
+python -m module5_rl.training --algo both --episodes 2500 --catalog sample --out module5_rl/my_run
+python -m module5_rl.evaluate --episodes 20 --budgets 45 90 --out module5_rl/my_run
+python -m module5_rl.action_profile --out module5_rl/my_run
+python -m module5_rl.ablation --out module5_rl/my_run
+```
+
+Training takes roughly 15 to 25 minutes depending on the machine, evaluation 10 to 15, the action profile about a minute and the ablation about 4. Each script reads the Q-tables from the `--out` folder, so run them in this order with the same folder.
+
+For a quick check that everything runs (about 2 minutes), add `--episodes 40` to the training command and `--episodes 2` to the other three, and use `--budgets 45` in evaluation. The numbers it produces are not meaningful.
+
+Training with `--catalog kg` instead uses the 11-concept course that `main.py` runs; the evaluation scripts always use the six-concept one.
+
+Using a policy directly:
 
 ```python
-from module4_planner.planner import AdaptivePlanner
+from module1_knowledge_graph.catalog import load_course_catalog
+from module3_student_model import ClassroomSimulator, StudentModelEngine, make_classroom
 from module5_rl.policies import AdvancingPlanner, RLTeachingPolicy
+
+catalog = load_course_catalog()
+sim = ClassroomSimulator(catalog, make_classroom(catalog, "mixed", 12, seed=0), seed=0)
+engine = StudentModelEngine(catalog, sim.student_ids())
 
 policy = RLTeachingPolicy.load("module5_rl/results/q_table_q_learning.npy",
                                "module5_rl/results/visits_q_learning.npy", time_budget=45.0)
-planner = AdvancingPlanner(catalog, policy=policy)   # AdaptivePlanner + "policy may advance early"
-decision = planner.plan_next(engine)                  # ActionDecision with rationale
+planner = AdvancingPlanner(catalog, policy=policy)
+decision = planner.plan_next(engine)      # an ActionDecision with a rationale
 ```
-`AdvancingPlanner` is needed only because the stock planner advances solely on its mastery criterion.
-`RLTeachingPolicy` keeps its own clock of class time (the interface has no time argument); call
-`policy.set_time_left(t)` if the controller knows the real time.
 
-## Results (evaluation classes of 24 students, unseen seeds; training used 12 students)
+`AdvancingPlanner` is the stock planner plus the ability for a policy to move on early; the stock planner only advances on its own mastery criterion. The policy keeps its own clock of remaining class time, since the interface doesn't pass one; call `policy.set_time_left(t)` if you know the real value.
 
-20 episodes x 6 scenarios = 120 paired episodes per policy. "known" = final share of (student, concept)
-pairs truly mastered; "left behind" = share of students who mastered < 40% of the syllabus.
+## Results
 
-| Policy | known (45) | left behind (45) | coverage (45) | known (90) | left behind (90) | coverage (90) |
+Evaluation classes of 24 students on unseen seeds (training used 12). 20 episodes in each of 6 scenarios gives 120 paired episodes per policy. "Known" is the final share of student-concept pairs truly mastered, "left behind" is the share of students who mastered under 40% of the syllabus, and "coverage" is the share of concepts completed.
+
+| Policy | Known (45) | Left behind (45) | Coverage (45) | Known (90) | Left behind (90) | Coverage (90) |
 |---|---|---|---|---|---|---|
-| Q-learning | **0.687** | 0.161 | 0.81 | **0.754** | **0.117** | 1.00 |
-| SARSA | 0.656 | **0.157** | 0.65 | 0.726 | 0.124 | 0.99 |
-| Team 4 heuristic | 0.517 | 0.359 | 0.36 | 0.616 | 0.235 | 0.67 |
+| Q-learning | 0.687 | 0.161 | 0.81 | 0.754 | 0.117 | 1.00 |
+| SARSA | 0.656 | 0.157 | 0.65 | 0.726 | 0.124 | 0.99 |
+| Rule-based heuristic | 0.517 | 0.359 | 0.36 | 0.616 | 0.235 | 0.67 |
 | Fixed lecture plan | 0.557 | 0.332 | 1.00 | 0.557 | 0.332 | 1.00 |
 | Threshold-repeat | 0.520 | 0.383 | 1.00 | 0.520 | 0.383 | 1.00 |
 | Random | 0.595 | 0.273 | 0.81 | 0.614 | 0.254 | 1.00 |
 
-Paired difference in `known`, Q-learning minus fixed plan: +0.130 +/- 0.010 (budget 45), +0.197 +/- 0.010 (budget 90).
-The policy was trained only at budget 45 and still generalises to 90 and to a larger class.
+The number in brackets is the time budget. Q-learning beats the fixed plan on knowledge by 0.130 (budget 45) and 0.197 (budget 90), with a 95% interval of about 0.010. It was trained only at budget 45 and still does well at 90 and with the larger class.
 
-## Limitations (please read before writing the report)
+## Limitations
 
-1. **A trivial policy matches the learned one.** "Give 7 examples per concept, then move on" (no adaptation)
-   scores known 0.717 / left-behind 0.14 / full coverage, versus Q-learning 0.688 / 0.16 / 0.78 coverage
-   (`results/ablation.txt`, difference -0.030 +/- 0.011). In this simulator, worked examples are the strongest
-   single action, and the standard baselines do not exploit that. So the table above shows the learned policy beats the
-   *given* baselines; it does **not** show that adaptive teaching beats the best fixed strategy.
-2. **Limited scenario-specific behaviour.** `results/action_profile.csv`: Q-learning gives examples 59-77% of the time
-   in every scenario, SARSA about 40-55% examples + about 40% peer discussion; targeted actions are only 6-16% of moves.
-   Differences between scenarios exist (e.g. more quizzes with dominant/quiet students) but are modest.
-   The Q-value gaps behind many choices are small (see `decision_trace_*.txt`).
-3. **Under-covers the syllabus at 45 units** (Q-learning 0.81, SARSA 0.65): it spends time per concept like the
-   examples-only policy but does not learn to advance quickly enough.
-4. **Participation balance is not improved**: Team 4's heuristic is higher (0.74 vs 0.70), notably in the dominant-talkers scenario.
-5. The reward weights and simulator are design choices; results are only as realistic as Team 3's simulator.
-6. SARSA's saved checkpoint is at 2,250 of 2,500 planned episodes (the run was interrupted after epsilon had reached its floor).
-   One training seed per algorithm; SARSA vs Q-learning (+0.031 +/- 0.012) should not be over-interpreted.
-7. All code was run with Python 3.12 in an environment without network access: the 22 tests were run with a minimal
-   stand-in for `pydantic` and a plain test runner, not real `pytest`. Please run `pytest module5_rl` on the project's Python 3.13 setup.
-
-## Suggested next steps
-
-* Ask Team 3 whether the dominance of EXAMPLE in the simulator is intended; adding diminishing returns for repeated
-  examples would force genuine adaptivity.
-* Add action-history and per-group (not class-average) features to the state; add a stronger penalty for slow coverage.
-* Evaluate with several training seeds; add the examples-only policy as a standard baseline in the report.
-* Optional: feed Team 5 Person B's NLU question analysis into the misconception-prevalence feature.
+1. **A trivial policy matches the learned one.** Giving seven worked examples per concept and then moving on, with no adaptation, scores known 0.717, left behind 0.14 and full coverage, against 0.688, 0.16 and 0.78 coverage for Q-learning (`results/ablation.txt`; Q-learning is lower by 0.030 +/- 0.011). Worked examples are the strongest single action in our simulator, and the standard baselines don't exploit that. So the table shows the learned policy beats the given baselines, not that adaptive teaching beats the best fixed strategy.
+2. **Behaviour barely varies between scenarios.** Per `results/action_profile.csv`, Q-learning gives an example 59 to 77% of the time in every scenario. SARSA uses roughly 40 to 55% examples and about 40% peer discussion. Targeted actions are only 5 to 16% of moves. The Q-value gaps behind many choices are small (see `decision_trace_*.txt`).
+3. **It under-covers the syllabus at 45 units** (0.81 for Q-learning, 0.65 for SARSA). It spends time per concept like the examples-only policy but doesn't learn to move on quickly enough.
+4. **Participation balance isn't improved.** The rule-based heuristic scores higher (0.74 against 0.70), most clearly in the dominant-talkers scenario.
+5. The reward weights and the simulator are our design choices, and the results are only as realistic as the simulator.
+6. SARSA's saved checkpoint is from episode 2,250 of the 2,500 planned, by which point epsilon had already reached its floor. Each algorithm was trained with one seed, so the gap between SARSA and Q-learning (+0.031 +/- 0.012 in Q-learning's favour) shouldn't be over-interpreted.
