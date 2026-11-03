@@ -1,17 +1,3 @@
-"""Builds classroom CSPs from live student-model estimates and solves them.
-
-    scheduler = GroupScheduler(catalog, student_ids, seed=0)
-    plan = scheduler.schedule(engine, concept_id, student_ids, kind="peer")
-    for group in plan.groups:
-        ...   # group.student_ids, group.ta, group.slot, group.concept_id, group.kind
-
-kind="peer": students who meet the concept's prerequisites are split into
-mixed-ability groups for the concept; students who do not are placed in
-TA-led revision groups for the prerequisites they are missing.
-kind="ta": every listed student is placed in a small TA-led group, either
-on the concept or on their first missing prerequisite.
-Groups scheduled earlier in a call use up TA time and rooms for later ones.
-"""
 
 from __future__ import annotations
 
