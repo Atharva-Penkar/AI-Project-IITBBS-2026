@@ -1,6 +1,6 @@
 """Regenerates the CSV files from knowledge_graph.json (the source of truth).
 
-    python export_csv.py
+    python -m module1_knowledge_graph.export_csv
 """
 import csv
 import json

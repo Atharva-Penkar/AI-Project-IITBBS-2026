@@ -1,7 +1,3 @@
-"""Demo of the classroom CSP: one valid arrangement and three infeasible ones with explanations.
-
-    python -m module2_csp.demo
-"""
 
 import copy
 
