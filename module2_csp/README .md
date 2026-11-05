@@ -34,7 +34,7 @@ Automatically organise students, teaching assistants (TAs), groups, activities a
 | `Student` | `sid`, `ability` ∈ [0,1], `mastery` {concept → P(mastery)}, `available_slots` |
 | `TeachingAssistant` | `tid`, `available_slots`, `max_groups` (workload cap), `expertise` (concepts; empty = any) |
 | `Activity` | `aid`, `name`, `kind` (revision / exercise / discussion / peer / ta), `concept` |
-| `ClassroomConfig` | students, TAs, activities, time slots, concept prerequisite graph, and the tunable parameters in §3.4 |
+| `ClassroomConfig` | students, TAs, activities, time slots, concept prerequisite graph, and the tunable parameters  |
 
 ### 3.2 Variables
 
