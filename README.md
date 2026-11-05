@@ -1,5 +1,7 @@
 # Agentic Classroom Digital Twin
 
+Presentation: https://canva.link/ekody479wsmwqwn
+
 A simulated classroom for trying out teaching strategies before using them on real students. A teacher agent decides what to do next (lecture, quiz, worked example, peer discussion, TA help, revision, move on) for a class of simulated students who know different things, hold different misconceptions and speak up to different degrees. We then measure what actually helped, including whether it helped the weaker students or only the strong ones.
 
 This is our project for the Artificial Intelligence course (Group 8, IIT Bhubaneswar, 2026). The simulated course is a short unit on search: BFS, DFS, path cost, priority queues, heuristics, UCS, greedy search and A*, 11 concepts in all.
